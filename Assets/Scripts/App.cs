@@ -6,5 +6,6 @@ public class App : Entry {
 
   void Awake() {
     this.Add(this.config);
+    this.Add<EventBus>();
   }
 }
