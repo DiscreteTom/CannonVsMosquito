@@ -4,9 +4,12 @@ using TMPro;
 public class ServerUrlInput : CBC {
   void Start() {
     var config = this.Get<Config>();
+    var input = this.GetComponent<TMP_InputField>();
 
-    this.GetComponent<TMP_InputField>().onEndEdit.AddListener((string serverUrl) => {
-      config.serverUrl = serverUrl;
-    });
+    // set initial value
+    input.text = config.serverUrl;
+
+    // register listener
+    input.onEndEdit.AddListener((serverUrl) => config.serverUrl = serverUrl);
   }
 }
