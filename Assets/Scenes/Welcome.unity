@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 436893634}
   - component: {fileID: 436893637}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: RoomIdInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30082c9a8097a9443a15c3dc3975585f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 0}
+  config: {fileID: 11400000, guid: e95ce7f7e29b5c2499e236efef48afc3, type: 2}
 --- !u!1 &1104061392
 GameObject:
   m_ObjectHideFlags: 0
