@@ -1,11 +1,11 @@
 using DT.General;
-using UnityEngine.UI;
+using TMPro;
 
 public class RoomIdInput : CBC {
   void Start() {
     var config = this.Get<Config>();
 
-    this.GetComponent<InputField>().onEndEdit.AddListener((string roomId) => {
+    this.GetComponent<TMP_InputField>().onEndEdit.AddListener((string roomId) => {
       config.roomId = roomId;
     });
   }
