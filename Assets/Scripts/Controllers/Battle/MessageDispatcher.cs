@@ -24,7 +24,7 @@ public class MessageDispatcher : CBC {
     });
 
     // process game events
-    eb.AddListener("game.shoot", (float x, float y, float angle) => {
+    eb.AddListener("local.shoot", (float x, float y, float angle) => {
       eb.Invoke("ws.send", JsonUtility.ToJson(new {
         action = "shoot",
         origin = new {
