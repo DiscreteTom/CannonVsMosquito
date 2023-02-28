@@ -5,4 +5,5 @@ public class Config : ScriptableObject {
   public string serverUrl;
   public string roomId;
   public int localPlayerId;
+  public int timeout = 60;
 }
