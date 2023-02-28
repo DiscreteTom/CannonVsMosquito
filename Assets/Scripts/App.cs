@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using DT.General;
 using UnityEngine;
 
-public class App : MonoBehaviour {
-  void Start() {
+public class App : Entry {
+  [SerializeField] Config config;
 
-  }
-
-  void Update() {
-
+  void Awake() {
+    this.Add(this.config);
   }
 }
