@@ -4,6 +4,7 @@ using UnityEngine;
 public class Config : ScriptableObject {
   [Header("Server")]
   public string serverUrl;
+  public float mockServerLatency = 0.2f;
 
   [Header("Game")]
   public string roomId;

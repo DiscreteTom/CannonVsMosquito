@@ -80,15 +80,17 @@ public class MessageDispatcher : CBC {
       });
 
       eb.AddListener("local.shoot", (float x, float y, float angle) => {
-        eb.Invoke("game.shoot", (new PlayerShootEvent {
-          player = config.localPlayerId,
-          hit = new int[] { 0, 1 },
-          origin = new Origin {
-            x = x,
-            y = y,
-          },
-          angle = angle,
-        }));
+        this.Invoke(() => {
+          eb.Invoke("game.shoot", (new PlayerShootEvent {
+            player = config.localPlayerId,
+            hit = new int[] { 0, 1 },
+            origin = new Origin {
+              x = x,
+              y = y,
+            },
+            angle = angle,
+          }));
+        }, config.mockServerLatency);
       });
     }
   }
