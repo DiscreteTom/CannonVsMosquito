@@ -38,7 +38,7 @@ public class Player : CBC {
             rotate = false;
 
             var angle = cannon.localEulerAngles.z;
-            eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, angle);
+            eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, (angle + 90) % 360);
           }
         });
 
