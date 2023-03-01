@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverUrl: 
   roomId: 
-  playerId: 0
+  localPlayerId: 0
+  timeout: 60
+  angleRange: 160
+  cannonRotationSpeed: 90
