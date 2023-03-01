@@ -30,5 +30,10 @@ public class TargetManager : CBC {
         targetDict.Remove(id);
       });
     });
+
+    eb.AddListener("game.over", (GameOverEvent _) => {
+      targetDict.Values.ForEach((g) => Destroy(g));
+      targetDict.Clear();
+    });
   }
 }
