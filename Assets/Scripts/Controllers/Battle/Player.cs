@@ -11,18 +11,22 @@ public class Player : CBC {
 
     eb.AddListener("game.start", (GameStartEvent _) => {
       bool rotate = true;
+      bool clockwise = false;
       // start rotation within angle range
       this.OnUpdate.AddListener(() => {
         if (!rotate) return;
 
-        var angle = cannon.localEulerAngles.z;
-        if (angle > 180) {
-          angle -= 360;
-        }
-        if (angle < config.angleRange / 2) {
-          cannon.Rotate(0, 0, config.cannonRotationSpeed * Time.deltaTime);
-        } else if (angle > -config.angleRange / 2) {
+
+        if (clockwise) {
           cannon.Rotate(0, 0, -config.cannonRotationSpeed * Time.deltaTime);
+        } else {
+          cannon.Rotate(0, 0, config.cannonRotationSpeed * Time.deltaTime);
+        }
+        var angle = cannon.localEulerAngles.z;
+        if (!clockwise && angle < 180 && angle > config.angleRange / 2) {
+          clockwise = true;
+        } else if (clockwise && angle > 180 && angle < -config.angleRange / 2 + 360) {
+          clockwise = false;
         }
       });
 
@@ -31,9 +35,6 @@ public class Player : CBC {
         this.OnUpdate.AddListener(() => {
           if (Input.GetKeyDown(KeyCode.Space)) {
             var angle = cannon.localEulerAngles.z;
-            if (angle > 180) {
-              angle -= 360;
-            }
             eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, angle);
             // stop rotation until we got the server ack
             rotate = false;
