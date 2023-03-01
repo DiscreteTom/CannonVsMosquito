@@ -80,7 +80,7 @@ public class MessageDispatcher : CBC {
       });
 
       eb.AddListener("local.shoot", (float x, float y, float angle) => {
-        eb.Invoke("game.send", (new PlayerShootEvent {
+        eb.Invoke("game.shoot", (new PlayerShootEvent {
           player = config.localPlayerId,
           hit = new int[] { 0, 1 },
           origin = new Origin {
