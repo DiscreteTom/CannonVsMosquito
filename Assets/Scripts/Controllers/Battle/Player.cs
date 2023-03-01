@@ -33,7 +33,7 @@ public class Player : CBC {
       // shoot if this player is the local player and when space is pressed
       if (this.playerId == config.localPlayerId) {
         this.OnUpdate.AddListener(() => {
-          if (Input.GetKeyDown(KeyCode.Space)) {
+          if (rotate && Input.GetKeyDown(KeyCode.Space)) {
             // stop rotation until we got the server ack
             rotate = false;
 
