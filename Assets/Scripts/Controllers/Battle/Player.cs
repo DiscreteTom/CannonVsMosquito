@@ -60,5 +60,23 @@ public class Player : CBC {
         text.text = score.ToString();
       }
     });
+
+    // draw laser
+    var lr = this.gameObject.AddComponent<LineRenderer>();
+    eb.AddListener("game.shoot", (PlayerShootEvent e) => {
+      if (e.player == this.playerId) {
+        lr.positionCount = 2;
+        lr.SetPosition(0, this.transform.position);
+        lr.SetPosition(1, new Vector3(this.transform.position.x + Mathf.Cos(Mathf.Deg2Rad * e.angle) * 100, this.transform.position.y + Mathf.Sin(Mathf.Deg2Rad * e.angle) * 100, 0));
+        lr.startWidth = config.laserWidth;
+        lr.endWidth = config.laserWidth;
+        lr.startColor = Color.red;
+        lr.endColor = Color.red;
+
+        this.Invoke(() => {
+          lr.positionCount = 0;
+        }, 0.5f); // clear laser after 0.5s
+      }
+    });
   }
 }
