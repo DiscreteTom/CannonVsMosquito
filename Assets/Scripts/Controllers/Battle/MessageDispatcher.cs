@@ -66,13 +66,13 @@ public class MessageDispatcher : CBC {
         eb.Invoke("game.start", new GameStartEvent {
           targets = new Target[] {
             new Target {
-              x = 0,
-              y = 0,
+              x = Random.Range(-5f, 0f),
+              y = Random.Range(-3, 3),
               id = 0,
             },
             new Target {
-              x = 0,
-              y = 0,
+              x = Random.Range(0f, 5f),
+              y = Random.Range(-3, 3),
               id = 1,
             },
           },
