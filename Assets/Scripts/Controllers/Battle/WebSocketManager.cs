@@ -3,11 +3,13 @@ using NativeWebSocket;
 using UnityEngine;
 
 public class WebSocketManager : CBC {
-  WebSocket websocket;
+  WebSocket websocket = null;
 
   async void Start() {
     var eb = this.Get<EventBus>();
     var config = this.Get<Config>();
+
+    if (config.serverUrl == "") return; // using mock server
 
     this.websocket = new WebSocket(config.serverUrl);
     this.OnUpdate.AddListener(() => {
@@ -46,6 +48,6 @@ public class WebSocketManager : CBC {
   }
 
   private async void OnApplicationQuit() {
-    await websocket.Close();
+    await websocket?.Close();
   }
 }
