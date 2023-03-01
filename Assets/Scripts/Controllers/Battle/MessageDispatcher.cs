@@ -116,7 +116,9 @@ public class MessageDispatcher : CBC {
       });
 
       // generate new target
+      var generate = true;
       this.InvokeRepeating(() => {
+        if (!generate) return;
         var newTargets = new Target[config.newTargetCount];
         for (var i = 0; i < config.newTargetCount; ++i) {
           targets[targetId] = new Target {
@@ -131,6 +133,14 @@ public class MessageDispatcher : CBC {
           targets = newTargets
         });
       }, config.mockServerLatency + config.newTargetInterval, config.newTargetInterval);
+
+      // mock game over event
+      this.Invoke(() => {
+        eb.Invoke("game.over", new GameOverEvent {
+          winner = config.localPlayerId,
+        });
+        generate = false;
+      }, config.mockServerLatency + config.gameTimeout);
     }
   }
 }
