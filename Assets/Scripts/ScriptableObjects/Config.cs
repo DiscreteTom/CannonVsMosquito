@@ -10,6 +10,8 @@ public class Config : ScriptableObject {
   public string roomId;
   public int localPlayerId;
   public int timeout = 60;
+  public float laserWidth = 0.6f;
+  public int initTargetCount = 5;
 
   [Header("Cannon")]
   public float angleRange = 160f;

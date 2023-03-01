@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DT.General;
 using UnityEngine;
 
@@ -62,28 +63,45 @@ public class MessageDispatcher : CBC {
       });
     } else {
       print("Using mock server");
+      var targets = new Dictionary<int, Target>();
+
+      // init targets
+      for (var i = 0; i < config.initTargetCount; ++i) {
+        targets[i] = new Target {
+          x = Random.Range(-5f, 5f),
+          y = Random.Range(-3f, 3f),
+          id = i,
+        };
+      }
+
       this.Invoke(() => {
         eb.Invoke("game.start", new GameStartEvent {
-          targets = new Target[] {
-            new Target {
-              x = Random.Range(-5f, 0f),
-              y = Random.Range(-3, 3),
-              id = 0,
-            },
-            new Target {
-              x = Random.Range(0f, 5f),
-              y = Random.Range(-3, 3),
-              id = 1,
-            },
-          },
+          targets = targets.Values.Map(v => v) // to array
         });
       }, config.mockServerLatency);
 
       eb.AddListener("local.shoot", (float x, float y, float angle) => {
         this.Invoke(() => {
+          // calculate hit
+          var hit = new List<int>();
+          foreach (var target in targets.Values) {
+            var targetPos = new Vector2(target.x, target.y);
+            var origin = new Vector2(x, y);
+            // calculate the distance between the target and the laser with origin and angle
+            var distance = Vector2.Distance(targetPos, origin) * Mathf.Abs(Mathf.Sin((Vector2.Angle(targetPos - origin, new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)))) * Mathf.Deg2Rad));
+            if (distance < (config.laserWidth + config.targetPrefab.transform.localScale.x) / 2) {
+              hit.Add(target.id);
+            }
+          }
+
+          // remove hit targets
+          foreach (var id in hit) {
+            targets.Remove(id);
+          }
+
           eb.Invoke("game.shoot", (new PlayerShootEvent {
             player = config.localPlayerId,
-            hit = new int[] { 0, 1 },
+            hit = hit.ToArray(),
             origin = new Origin {
               x = x,
               y = y,

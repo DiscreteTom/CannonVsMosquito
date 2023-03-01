@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   serverUrl: 
+  mockServerLatency: 0.2
   roomId: 
   localPlayerId: 0
   timeout: 60
+  laserWidth: 0.6
+  initTargetCount: 10
   angleRange: 160
   cannonRotationSpeed: 90
   targetPrefab: {fileID: 7190946530104873606, guid: 8afb782767591c946acec78f925ff873, type: 3}
