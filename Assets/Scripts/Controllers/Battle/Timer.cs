@@ -9,11 +9,12 @@ public class Timer : CBC {
     var config = this.Get<Config>();
 
     eb.AddListener("game.start", (GameStartEvent _) => {
-      var timeout = (float)config.timeout;
+      var timeout = (float)config.gameTimeout;
       text.text = timeout.ToString();
       this.OnUpdate.AddListener(() => {
         timeout -= Time.deltaTime;
-        text.text = Mathf.CeilToInt(timeout).ToString();
+        if (timeout > -1)
+          text.text = Mathf.CeilToInt(timeout).ToString();
       });
     });
   }
