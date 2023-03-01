@@ -1,4 +1,5 @@
 using DT.General;
+using TMPro;
 using UnityEngine;
 
 public class Player : CBC {
@@ -47,6 +48,16 @@ public class Player : CBC {
             rotate = true;
           }
         });
+      }
+    });
+
+    // update player score text
+    var text = this.transform.Find("Canvas/ScoreText").GetComponent<TMP_Text>();
+    var score = 0;
+    eb.AddListener("game.shoot", (PlayerShootEvent e) => {
+      if (e.player == this.playerId) {
+        score += e.hit.Length;
+        text.text = score.ToString();
       }
     });
   }
