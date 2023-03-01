@@ -62,7 +62,7 @@ public class MessageDispatcher : CBC {
       });
     } else {
       print("Using mock server");
-      this.OnNextUpdate.AddListener(() => {
+      this.Invoke(() => {
         eb.Invoke("game.start", new GameStartEvent {
           targets = new Target[] {
             new Target {
@@ -77,7 +77,7 @@ public class MessageDispatcher : CBC {
             },
           },
         });
-      });
+      }, config.mockServerLatency);
 
       eb.AddListener("local.shoot", (float x, float y, float angle) => {
         this.Invoke(() => {
