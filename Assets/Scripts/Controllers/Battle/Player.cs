@@ -16,7 +16,6 @@ public class Player : CBC {
       this.OnUpdate.AddListener(() => {
         if (!rotate) return;
 
-
         if (clockwise) {
           cannon.Rotate(0, 0, -config.cannonRotationSpeed * Time.deltaTime);
         } else {
@@ -34,10 +33,11 @@ public class Player : CBC {
       if (this.playerId == config.localPlayerId) {
         this.OnUpdate.AddListener(() => {
           if (Input.GetKeyDown(KeyCode.Space)) {
-            var angle = cannon.localEulerAngles.z;
-            eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, angle);
             // stop rotation until we got the server ack
             rotate = false;
+
+            var angle = cannon.localEulerAngles.z;
+            eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, angle);
           }
         });
 
