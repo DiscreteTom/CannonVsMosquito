@@ -48,6 +48,8 @@ public class WebSocketManager : CBC {
   }
 
   private async void OnApplicationQuit() {
-    await websocket?.Close();
+    if (websocket != null) {
+      await websocket.Close();
+    }
   }
 }
