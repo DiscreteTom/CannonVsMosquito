@@ -64,22 +64,26 @@ public class MessageDispatcher : CBC {
     } else {
       print("Using mock server");
       var targets = new Dictionary<int, Target>();
+      var targetId = 0;
 
       // init targets
       for (var i = 0; i < config.initTargetCount; ++i) {
         targets[i] = new Target {
           x = Random.Range(-5f, 5f),
           y = Random.Range(-3f, 3f),
-          id = i,
+          id = targetId,
         };
+        ++targetId;
       }
 
+      // start game
       this.Invoke(() => {
         eb.Invoke("game.start", new GameStartEvent {
           targets = targets.Values.Map(v => v) // to array
         });
       }, config.mockServerLatency);
 
+      // handle shoot events
       eb.AddListener("local.shoot", (float x, float y, float angle) => {
         this.Invoke(() => {
           // calculate hit
@@ -110,6 +114,23 @@ public class MessageDispatcher : CBC {
           }));
         }, config.mockServerLatency);
       });
+
+      // generate new target
+      this.InvokeRepeating(() => {
+        var newTargets = new Target[config.newTargetCount];
+        for (var i = 0; i < config.newTargetCount; ++i) {
+          targets[targetId] = new Target {
+            x = Random.Range(-5f, 5f),
+            y = Random.Range(-3f, 3f),
+            id = targetId,
+          };
+          newTargets[i] = targets[targetId];
+          ++targetId;
+        }
+        eb.Invoke("game.newTarget", new NewTargetEvent {
+          targets = newTargets
+        });
+      }, config.mockServerLatency + config.newTargetInterval, config.newTargetInterval);
     }
   }
 }
