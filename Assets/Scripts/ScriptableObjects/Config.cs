@@ -12,7 +12,7 @@ public class Config : ScriptableObject {
   [Header("Game")]
   public string roomId;
   public int localPlayerId;
-  public int timeout = 60;
+  public int gameTimeout = 60;
   public float laserWidth = 0.6f;
 
   [Header("Cannon")]

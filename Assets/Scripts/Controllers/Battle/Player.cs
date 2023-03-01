@@ -49,6 +49,11 @@ public class Player : CBC {
           }
         });
       }
+
+      // handle game over
+      eb.AddListener("game.over", (GameOverEvent e) => {
+        rotate = false;
+      });
     });
 
     // update player score text
