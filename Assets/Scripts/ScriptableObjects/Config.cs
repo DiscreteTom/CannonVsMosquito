@@ -21,6 +21,8 @@ public class Config : ScriptableObject {
 
   [Header("Target")]
   public float initTargetGrowSpeed = 5;
+  public float targetFloatSpeed = 4;
+  public float targetFloatRange = 0.03f;
 
   [Header("Prefabs")]
   public GameObject targetPrefab;

@@ -16,10 +16,10 @@ public class TargetObject : CBC {
 
     // float
     var position = this.transform.position;
-    var randomX = Random.Range(-3f, 3f);
-    var randomY = Random.Range(-3f, 3f);
+    var randomX = Random.Range(0, Mathf.PI);
+    var randomY = Random.Range(0, Mathf.PI);
     this.OnUpdate.AddListener(() => {
-      this.transform.position = position + new Vector3(Mathf.Sin(Time.time * 4 + randomX) * 0.03f, Mathf.Sin(Time.time * 4 + randomY) * 0.03f, 0);
+      this.transform.position = position + new Vector3(Mathf.Sin(Time.time * config.targetFloatSpeed + randomX), Mathf.Sin(Time.time * config.targetFloatSpeed + randomY), 0) * config.targetFloatRange;
     });
   }
 }
