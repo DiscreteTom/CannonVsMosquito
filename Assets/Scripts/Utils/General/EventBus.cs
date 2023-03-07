@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace DT.General {
@@ -72,30 +73,35 @@ namespace DT.General {
     }
 
     public void Invoke(object key) {
+      Debug.Log(key);
       if (!this.dict.ContainsKey(key)) {
         return;
       }
       ((UnityEvent)this.dict[key]).Invoke();
     }
     public void Invoke<T0>(object key, T0 arg0) {
+      Debug.Log(key);
       if (!this.dict.ContainsKey(key)) {
         return;
       }
       ((UnityEvent<T0>)this.dict[key]).Invoke(arg0);
     }
     public void Invoke<T0, T1>(object key, T0 arg0, T1 arg1) {
+      Debug.Log(key);
       if (!this.dict.ContainsKey(key)) {
         return;
       }
       ((UnityEvent<T0, T1>)this.dict[key]).Invoke(arg0, arg1);
     }
     public void Invoke<T0, T1, T2>(object key, T0 arg0, T1 arg1, T2 arg2) {
+      Debug.Log(key);
       if (!this.dict.ContainsKey(key)) {
         return;
       }
       ((UnityEvent<T0, T1, T2>)this.dict[key]).Invoke(arg0, arg1, arg2);
     }
     public void Invoke<T0, T1, T2, T3>(object key, T0 arg0, T1 arg1, T2 arg2, T3 arg3) {
+      Debug.Log(key);
       if (!this.dict.ContainsKey(key)) {
         return;
       }
