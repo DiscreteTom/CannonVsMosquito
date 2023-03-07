@@ -19,6 +19,9 @@ public class Config : ScriptableObject {
   public float angleRange = 160f;
   public float cannonRotationSpeed = 180f;
 
+  [Header("Target")]
+  public float initTargetGrowSpeed = 5;
+
   [Header("Prefabs")]
   public GameObject targetPrefab;
 }
