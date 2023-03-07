@@ -13,11 +13,13 @@ public class Config : ScriptableObject {
   public string roomId;
   public int localPlayerId;
   public int gameTimeout = 60;
-  public float laserWidth = 0.6f;
 
   [Header("Cannon")]
   public float angleRange = 160f;
   public float cannonRotationSpeed = 180f;
+
+  [Header("Laser")]
+  public float laserWidth = 0.6f;
   public float laserFadeSpeed = 5f;
   public Material laserMaterial;
 
