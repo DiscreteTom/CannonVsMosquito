@@ -18,6 +18,8 @@ public class Config : ScriptableObject {
   [Header("Cannon")]
   public float angleRange = 160f;
   public float cannonRotationSpeed = 180f;
+  public float laserFadeSpeed = 5f;
+  public Material laserMaterial;
 
   [Header("Target")]
   public float initTargetGrowSpeed = 5;

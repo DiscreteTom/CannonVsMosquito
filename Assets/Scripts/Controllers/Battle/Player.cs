@@ -74,6 +74,8 @@ public class Player : CBC {
 
     // draw laser
     var lr = this.gameObject.AddComponent<LineRenderer>();
+    lr.material = config.laserMaterial;
+    lr.sortingOrder = -1;
     eb.AddListener("game.shoot", (PlayerShootEvent e) => {
       if (e.player == this.playerId) {
         lr.positionCount = 2;
@@ -81,12 +83,19 @@ public class Player : CBC {
         lr.SetPosition(1, new Vector3(this.transform.position.x + Mathf.Cos(Mathf.Deg2Rad * e.angle) * 100, this.transform.position.y + Mathf.Sin(Mathf.Deg2Rad * e.angle) * 100, 0));
         lr.startWidth = config.laserWidth;
         lr.endWidth = config.laserWidth;
-        lr.startColor = Color.red;
-        lr.endColor = Color.red;
+        lr.startColor = Color.white;
+        lr.endColor = Color.white;
 
         this.Invoke(() => {
           lr.positionCount = 0;
-        }, 0.5f); // clear laser after 0.5s
+        }, config.laserWidth / config.laserFadeSpeed); // clear laser points
+      }
+    });
+    // laser fade
+    this.OnUpdate.AddListener(() => {
+      if (lr.positionCount > 0 && lr.startWidth > 0) {
+        lr.startWidth -= Time.deltaTime * config.laserFadeSpeed;
+        lr.endWidth -= Time.deltaTime * config.laserFadeSpeed;
       }
     });
   }

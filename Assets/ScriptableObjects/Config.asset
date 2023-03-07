@@ -23,5 +23,8 @@ MonoBehaviour:
   laserWidth: 0.6
   angleRange: 160
   cannonRotationSpeed: 90
+  laserMaterial: {fileID: 2100000, guid: 076523129d70ac741ac7ee54e6723bff, type: 2}
   initTargetGrowSpeed: 5
+  targetFloatSpeed: 4
+  targetFloatRange: 0.03
   targetPrefab: {fileID: 7190946530104873606, guid: 8afb782767591c946acec78f925ff873, type: 3}
