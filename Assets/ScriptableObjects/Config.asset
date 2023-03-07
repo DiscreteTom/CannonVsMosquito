@@ -20,9 +20,12 @@ MonoBehaviour:
   roomId: 
   localPlayerId: 0
   gameTimeout: 60
-  laserWidth: 0.6
+  scoreShakeScale: 1.5
+  scoreShakeSpeed: 2
   angleRange: 160
   cannonRotationSpeed: 90
+  laserWidth: 0.6
+  laserFadeSpeed: 5
   laserMaterial: {fileID: 2100000, guid: 076523129d70ac741ac7ee54e6723bff, type: 2}
   initTargetGrowSpeed: 5
   targetFloatSpeed: 4

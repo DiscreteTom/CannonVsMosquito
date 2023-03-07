@@ -13,6 +13,8 @@ public class Config : ScriptableObject {
   public string roomId;
   public int localPlayerId;
   public int gameTimeout = 60;
+  public float scoreShakeScale = 1.1f;
+  public float scoreShakeSpeed = 0.2f;
 
   [Header("Cannon")]
   public float angleRange = 160f;

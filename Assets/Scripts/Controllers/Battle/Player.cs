@@ -65,10 +65,20 @@ public class Player : CBC {
     // update player score text
     var text = this.transform.Find("Canvas/ScoreText").GetComponent<TMP_Text>();
     var score = 0;
+    var textScale = text.transform.localScale; // save initial scale
     eb.AddListener("game.shoot", (PlayerShootEvent e) => {
       if (e.player == this.playerId) {
         score += e.hit.Length;
         text.text = score.ToString();
+        text.transform.localScale = textScale * config.scoreShakeScale;
+      }
+    });
+    // text shake
+    this.OnUpdate.AddListener(() => {
+      if (text.transform.localScale.x > textScale.x) {
+        text.transform.localScale -= textScale * config.scoreShakeSpeed * Time.deltaTime;
+      } else {
+        text.transform.localScale = textScale;
       }
     });
 
