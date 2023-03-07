@@ -24,6 +24,9 @@ public class Config : ScriptableObject {
   public float laserWidth = 0.6f;
   public float laserFadeSpeed = 5f;
   public Material laserMaterial;
+  public float laserPowerGrowSpeed = 2;
+  public float laserPowerMoveSpeed = 4;
+  public float laserPowerMoveRange = 0.03f;
 
   [Header("Target")]
   public float initTargetGrowSpeed = 5;

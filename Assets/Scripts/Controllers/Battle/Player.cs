@@ -11,6 +11,11 @@ public class Player : CBC {
     var cannon = this.transform.Find("Cannon");
     var animator = cannon.GetComponent<Animator>();
     bool rotate = true;
+    var laserPower = cannon.Find("LaserPower");
+    var laserPowerScale = laserPower.transform.localScale;
+    var laserPowerSr = laserPower.GetComponent<SpriteRenderer>();
+    var laserPowerInitLocalPos = laserPower.localPosition;
+    laserPowerSr.enabled = false; // disable at start
 
     eb.AddListener("game.start", (GameStartEvent _) => {
       animator.SetBool("rotating", rotate);
@@ -40,6 +45,10 @@ public class Player : CBC {
             // stop rotation until we got the server ack
             rotate = false;
             animator.SetBool("rotating", rotate);
+
+            // enable laser power
+            laserPowerSr.enabled = true;
+            laserPower.transform.localScale = Vector3.zero;
 
             var angle = cannon.localEulerAngles.z;
             eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, (angle + 90) % 360);
@@ -102,6 +111,33 @@ public class Player : CBC {
         lr.startWidth -= Time.deltaTime * config.laserFadeSpeed;
         lr.endWidth -= Time.deltaTime * config.laserFadeSpeed;
       }
+    });
+
+    // laser power
+    this.OnUpdate.AddListener(() => {
+      if (laserPowerSr.enabled) {
+        // grow
+        if (laserPower.transform.localScale.x >= laserPowerScale.x) {
+          laserPower.transform.localScale = laserPowerScale;
+        }
+        laserPower.transform.localScale += laserPowerScale * config.laserPowerGrowSpeed * Time.deltaTime;
+
+        // randomly float
+        var randomX = Random.Range(0, Mathf.PI);
+        var randomY = Random.Range(0, Mathf.PI);
+        this.OnUpdate.AddListener(() => {
+          laserPower.localPosition = laserPowerInitLocalPos + new Vector3(Mathf.Sin(Time.time * config.laserPowerMoveSpeed + randomX), Mathf.Sin(Time.time * config.laserPowerMoveSpeed + randomY), 0) * config.laserPowerMoveRange;
+        });
+      }
+    });
+    eb.AddListener("game.shoot", (PlayerShootEvent e) => {
+      if (e.player == this.playerId) {
+        // disable laser power
+        laserPowerSr.enabled = false;
+      }
+    });
+    eb.AddListener("game.over", (GameOverEvent e) => {
+      laserPowerSr.enabled = false;
     });
   }
 }
