@@ -9,9 +9,12 @@ public class Player : CBC {
     var eb = this.Get<EventBus>();
     var config = this.Get<Config>();
     var cannon = this.transform.Find("Cannon");
+    var animator = cannon.GetComponent<Animator>();
 
     eb.AddListener("game.start", (GameStartEvent _) => {
       bool rotate = true;
+      animator.SetBool("rotating", rotate);
+
       bool clockwise = false;
       // start rotation within angle range
       this.OnUpdate.AddListener(() => {
@@ -36,6 +39,7 @@ public class Player : CBC {
           if (rotate && Input.GetKeyDown(KeyCode.Space)) {
             // stop rotation until we got the server ack
             rotate = false;
+            animator.SetBool("rotating", rotate);
 
             var angle = cannon.localEulerAngles.z;
             eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, (angle + 90) % 360);
@@ -46,6 +50,7 @@ public class Player : CBC {
           if (e.player == this.playerId) {
             // start rotation again
             rotate = true;
+            animator.SetBool("rotating", rotate);
           }
         });
       }
@@ -53,6 +58,7 @@ public class Player : CBC {
       // handle game over
       eb.AddListener("game.over", (GameOverEvent e) => {
         rotate = false;
+        animator.SetBool("rotating", rotate);
       });
     });
 
