@@ -10,9 +10,9 @@ public class Player : CBC {
     var config = this.Get<Config>();
     var cannon = this.transform.Find("Cannon");
     var animator = cannon.GetComponent<Animator>();
+    bool rotate = true;
 
     eb.AddListener("game.start", (GameStartEvent _) => {
-      bool rotate = true;
       animator.SetBool("rotating", rotate);
 
       bool clockwise = false;
@@ -43,14 +43,6 @@ public class Player : CBC {
 
             var angle = cannon.localEulerAngles.z;
             eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, (angle + 90) % 360);
-          }
-        });
-
-        eb.AddListener("game.shoot", (PlayerShootEvent e) => {
-          if (e.player == this.playerId) {
-            // start rotation again
-            rotate = true;
-            animator.SetBool("rotating", rotate);
           }
         });
       }
@@ -98,6 +90,9 @@ public class Player : CBC {
 
         this.Invoke(() => {
           lr.positionCount = 0;
+          // start rotation again
+          rotate = true;
+          animator.SetBool("rotating", rotate);
         }, config.laserWidth / config.laserFadeSpeed); // clear laser points
       }
     });
