@@ -26,7 +26,9 @@ public class TargetManager : CBC {
 
     eb.AddListener("game.shoot", (PlayerShootEvent e) => {
       e.hit.ForEach(id => {
-        Destroy(targetDict[id]);
+        var go = targetDict[id];
+        Instantiate(config.deadTargetPrefab, go.transform.position, Quaternion.identity);
+        Destroy(go);
         targetDict.Remove(id);
       });
     });

@@ -27,7 +27,13 @@ MonoBehaviour:
   laserWidth: 0.6
   laserFadeSpeed: 5
   laserMaterial: {fileID: 2100000, guid: 076523129d70ac741ac7ee54e6723bff, type: 2}
+  laserPowerGrowSpeed: 2
+  laserPowerMoveSpeed: 4
+  laserPowerMoveRange: 0.03
   initTargetGrowSpeed: 5
   targetFloatSpeed: 4
   targetFloatRange: 0.03
+  deadTargetRotateSpeed: 180
+  deadTargetUpForce: 10
   targetPrefab: {fileID: 7190946530104873606, guid: 8afb782767591c946acec78f925ff873, type: 3}
+  deadTargetPrefab: {fileID: 3501078755375035353, guid: 3099684a658df1b4ab4d630cd246b0da, type: 3}

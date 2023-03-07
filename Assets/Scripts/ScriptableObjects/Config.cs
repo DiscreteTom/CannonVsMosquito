@@ -33,6 +33,11 @@ public class Config : ScriptableObject {
   public float targetFloatSpeed = 4;
   public float targetFloatRange = 0.03f;
 
+  [Header("Dead Target")]
+  public float deadTargetRotateSpeed = 180f;
+  public float deadTargetUpForce = 2f;
+
   [Header("Prefabs")]
   public GameObject targetPrefab;
+  public GameObject deadTargetPrefab;
 }
