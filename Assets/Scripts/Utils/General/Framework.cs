@@ -30,15 +30,15 @@ namespace DT.General {
         if (this._core != null) return this._core;
 
         // first, try to find the core in the root object
-        this._core = this.transform.root.GetComponent<Entry>().core;
+        this._core = this.transform.root.GetComponent<Entry>()?.core;
         if (this._core != null) return this._core;
 
         // second, try to find the core in the parent object
-        this._core = this.GetComponentInParent<Entry>().core;
+        this._core = this.GetComponentInParent<Entry>()?.core;
         if (this._core != null) return this._core;
 
         // finally, try to find the core in the whole scene
-        this._core = GameObject.FindObjectOfType<Entry>().core;
+        this._core = GameObject.FindObjectOfType<Entry>()?.core;
         if (this._core != null) return this._core;
 
         // if we can't find the core, throw an error
