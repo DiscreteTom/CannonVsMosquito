@@ -8,6 +8,7 @@ public class Config : ScriptableObject {
   public int initTargetCount = 5;
   public float newTargetInterval = 3f;
   public int newTargetCount = 3;
+  public float mockPlayerShootInterval = 0.5f;
 
   [Header("Game")]
   public string roomId;

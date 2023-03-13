@@ -17,6 +17,7 @@ MonoBehaviour:
   initTargetCount: 10
   newTargetInterval: 3
   newTargetCount: 3
+  mockPlayerShootInterval: 1
   roomId: 
   localPlayerId: 0
   gameTimeout: 60

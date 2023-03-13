@@ -84,7 +84,7 @@ public class MessageDispatcher : CBC {
       }, config.mockServerLatency);
 
       // handle shoot events
-      eb.AddListener("local.shoot", (float x, float y, float angle) => {
+      eb.AddListener("local.shoot", (float x, float y, float angle, int playerId) => {
         this.Invoke(() => {
           // calculate hit
           var hit = new List<int>();
@@ -104,7 +104,7 @@ public class MessageDispatcher : CBC {
           }
 
           eb.Invoke("game.shoot", (new PlayerShootEvent {
-            player = config.localPlayerId,
+            player = playerId,
             hit = hit.ToArray(),
             origin = new Origin {
               x = x,

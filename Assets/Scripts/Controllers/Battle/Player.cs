@@ -51,7 +51,7 @@ public class Player : CBC {
             laserPower.transform.localScale = Vector3.zero;
 
             var angle = cannon.localEulerAngles.z;
-            eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, (angle + 90) % 360);
+            eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, (angle + 90) % 360, this.playerId);
           }
         });
       }
@@ -61,6 +61,20 @@ public class Player : CBC {
         rotate = false;
         animator.SetBool("rotating", rotate);
       });
+
+      // mock player shoot
+      var useMockServer = config.serverUrl == "";
+      if (useMockServer && this.playerId != config.localPlayerId) {
+        var timeout = config.mockPlayerShootInterval;
+        this.OnUpdate.AddListener(() => {
+          timeout -= Time.deltaTime;
+          if (timeout < 0 && rotate) {
+            var angle = cannon.localEulerAngles.z;
+            eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, (angle + 90) % 360, this.playerId);
+            timeout = config.mockPlayerShootInterval;
+          }
+        });
+      }
     });
 
     // update player score text
@@ -72,6 +86,8 @@ public class Player : CBC {
         score += e.hit.Length;
         text.text = score.ToString();
         text.transform.localScale = textScale * config.scoreShakeScale;
+        // calibrate shooter angle
+        cannon.localEulerAngles = new Vector3(0, 0, e.angle - 90);
       }
     });
     // text shake
