@@ -4,6 +4,7 @@
 
 - Fix: WebSocket client send empty object since JsonUtility can't serialize anonymous class.
 - Fix: Server event should be deserialized twice.
+- Fix: Make structures serializable.
 
 ## v0.1.1
 
