@@ -5,6 +5,7 @@
 - Fix: WebSocket client send empty object since JsonUtility can't serialize anonymous class.
 - Fix: Server event should be deserialized twice.
 - Fix: Make structures serializable.
+- Fix: Set `C++ compiler configuration` to `Debug` instead of `Release` to avoid `Not implemented: Class::FromIl2CppType`. Deep dive this issue later.
 
 ## v0.1.1
 
