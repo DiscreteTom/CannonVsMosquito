@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.3
+
+- Set `C++ compiler configuration` to `Release` instead of `Debug`.
+
 ## v0.1.2
 
 - Fix: WebSocket client send empty object since JsonUtility can't serialize anonymous class.
