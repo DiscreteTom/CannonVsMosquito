@@ -39,6 +39,7 @@ public class WebSocketManager : CBC {
 
     eb.AddListener("ws.send", (string message) => {
       if (websocket.State == WebSocketState.Open) {
+        Debug.Log("Send: " + message);
         websocket.SendText(message);
       }
     });
