@@ -13,13 +13,13 @@ public class MessageDispatcher : CBC {
       eb.AddListener("ws.connected", () => {
         if (config.localPlayerId == 0) {
           // create room
-          eb.Invoke("ws.send", JsonUtility.ToJson(new {
+          eb.Invoke("ws.send", JsonUtility.ToJson(new CreateRoomAction {
             action = "create",
             room = config.roomId,
           }));
         } else {
           // join room
-          eb.Invoke("ws.send", JsonUtility.ToJson(new {
+          eb.Invoke("ws.send", JsonUtility.ToJson(new JoinRoomAction {
             action = "join",
             room = config.roomId,
           }));
@@ -28,9 +28,9 @@ public class MessageDispatcher : CBC {
 
       // process game events
       eb.AddListener("local.shoot", (float x, float y, float angle) => {
-        eb.Invoke("ws.send", JsonUtility.ToJson(new {
+        eb.Invoke("ws.send", JsonUtility.ToJson(new ShootAction {
           action = "shoot",
-          origin = new {
+          origin = new Origin {
             x = x,
             y = y,
           },
@@ -175,4 +175,17 @@ public struct NewTargetEvent {
 }
 public struct GameOverEvent {
   public int winner;
+}
+public struct CreateRoomAction {
+  public string action;
+  public string room;
+}
+public struct JoinRoomAction {
+  public string action;
+  public string room;
+}
+public struct ShootAction {
+  public string action;
+  public Origin origin;
+  public float angle;
 }
