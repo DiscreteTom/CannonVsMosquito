@@ -3,6 +3,7 @@
 ## v0.1.2
 
 - Fix: WebSocket client send empty object since JsonUtility can't serialize anonymous class.
+- Fix: Server event should be deserialized twice.
 
 ## v0.1.1
 

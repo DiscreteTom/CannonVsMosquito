@@ -42,20 +42,20 @@ public class MessageDispatcher : CBC {
       eb.AddListener("ws.message", (string str) => {
         var raw = JsonUtility.FromJson<ServerMessage>(str);
         if (raw.type == "error") {
-          var msg = JsonUtility.FromJson<ErrorEvent>(str);
+          var msg = JsonUtility.FromJson<ErrorEvent>(raw.msg);
           eb.Invoke("game.error", msg);
           Debug.LogError(msg.type);
         } else if (raw.type == "game start") {
-          var msg = JsonUtility.FromJson<GameStartEvent>(str);
+          var msg = JsonUtility.FromJson<GameStartEvent>(raw.msg);
           eb.Invoke("game.start", msg);
         } else if (raw.type == "player shoot") {
-          var msg = JsonUtility.FromJson<PlayerShootEvent>(str);
+          var msg = JsonUtility.FromJson<PlayerShootEvent>(raw.msg);
           eb.Invoke("game.shoot", msg);
         } else if (raw.type == "new target") {
-          var msg = JsonUtility.FromJson<NewTargetEvent>(str);
+          var msg = JsonUtility.FromJson<NewTargetEvent>(raw.msg);
           eb.Invoke("game.newTarget", msg);
         } else if (raw.type == "game over") {
-          var msg = JsonUtility.FromJson<GameOverEvent>(str);
+          var msg = JsonUtility.FromJson<GameOverEvent>(raw.msg);
           eb.Invoke("game.over", msg);
         } else {
           Debug.LogError("Unknown message type: " + raw.type);
