@@ -3,6 +3,7 @@
 ## v0.1.3
 
 - Set `C++ compiler configuration` to `Release` instead of `Debug`.
+- Fix: Player can't shoot.
 
 ## v0.1.2
 
