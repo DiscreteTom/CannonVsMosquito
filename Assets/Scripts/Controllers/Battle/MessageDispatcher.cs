@@ -44,7 +44,7 @@ public class MessageDispatcher : CBC {
         var raw = TryDeserialize<ServerMessage>(str);
         if (raw.type == "error") {
           var msg = TryDeserialize<ErrorEvent>(raw.msg);
-          eb.Invoke("game.error", msg);
+          eb.Invoke("game.error", msg.type);
           Debug.LogError(msg.type);
         } else if (raw.type == "game start") {
           var msg = TryDeserialize<GameStartEvent>(raw.msg);
@@ -60,6 +60,7 @@ public class MessageDispatcher : CBC {
           eb.Invoke("game.over", msg);
         } else {
           Debug.LogError("Unknown message type: " + raw.type);
+          eb.Invoke("game.error", "Unknown message type: " + raw.type);
         }
       });
     } else {
