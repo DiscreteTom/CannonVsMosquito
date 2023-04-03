@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DT.General;
 using UnityEngine;
@@ -40,22 +41,22 @@ public class MessageDispatcher : CBC {
 
       // listen for messages from the server and invoke game events
       eb.AddListener("ws.message", (string str) => {
-        var raw = JsonUtility.FromJson<ServerMessage>(str);
+        var raw = TryDeserialize<ServerMessage>(str);
         if (raw.type == "error") {
-          var msg = JsonUtility.FromJson<ErrorEvent>(raw.msg);
+          var msg = TryDeserialize<ErrorEvent>(raw.msg);
           eb.Invoke("game.error", msg);
           Debug.LogError(msg.type);
         } else if (raw.type == "game start") {
-          var msg = JsonUtility.FromJson<GameStartEvent>(raw.msg);
+          var msg = TryDeserialize<GameStartEvent>(raw.msg);
           eb.Invoke("game.start", msg);
         } else if (raw.type == "player shoot") {
-          var msg = JsonUtility.FromJson<PlayerShootEvent>(raw.msg);
+          var msg = TryDeserialize<PlayerShootEvent>(raw.msg);
           eb.Invoke("game.shoot", msg);
         } else if (raw.type == "new target") {
-          var msg = JsonUtility.FromJson<NewTargetEvent>(raw.msg);
+          var msg = TryDeserialize<NewTargetEvent>(raw.msg);
           eb.Invoke("game.newTarget", msg);
         } else if (raw.type == "game over") {
-          var msg = JsonUtility.FromJson<GameOverEvent>(raw.msg);
+          var msg = TryDeserialize<GameOverEvent>(raw.msg);
           eb.Invoke("game.over", msg);
         } else {
           Debug.LogError("Unknown message type: " + raw.type);
@@ -69,8 +70,8 @@ public class MessageDispatcher : CBC {
       // init targets
       for (var i = 0; i < config.initTargetCount; ++i) {
         targets[i] = new Target {
-          x = Random.Range(-5f, 5f),
-          y = Random.Range(-3f, 3f),
+          x = UnityEngine.Random.Range(-5f, 5f),
+          y = UnityEngine.Random.Range(-3f, 3f),
           id = targetId,
         };
         ++targetId;
@@ -122,8 +123,8 @@ public class MessageDispatcher : CBC {
         var newTargets = new Target[config.newTargetCount];
         for (var i = 0; i < config.newTargetCount; ++i) {
           targets[targetId] = new Target {
-            x = Random.Range(-5f, 5f),
-            y = Random.Range(-3f, 3f),
+            x = UnityEngine.Random.Range(-5f, 5f),
+            y = UnityEngine.Random.Range(-3f, 3f),
             id = targetId,
           };
           newTargets[i] = targets[targetId];
@@ -141,6 +142,16 @@ public class MessageDispatcher : CBC {
         });
         generate = false;
       }, config.mockServerLatency + config.gameTimeout);
+    }
+  }
+
+  static T TryDeserialize<T>(string str) {
+    try {
+      return JsonUtility.FromJson<T>(str);
+    } catch (Exception e) {
+      Debug.LogError("Failed to deserialize string: " + str + " to type " + typeof(T).Name + ", returning default value.");
+      Debug.LogError(e);
+      return default(T);
     }
   }
 }
