@@ -1,6 +1,5 @@
-using DT.General;
+using DT.UniStart;
 using TMPro;
-using UnityEngine;
 
 public class GameOver : CBC {
   void Start() {

@@ -1,4 +1,5 @@
 using DT.General;
+using DT.UniStart;
 using TMPro;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ public class Player : CBC {
 
       bool clockwise = false;
       // start rotation within angle range
-      this.OnUpdate.AddListener(() => {
+      this.onUpdate.AddListener(() => {
         if (!rotate) return;
 
         if (clockwise) {
@@ -40,7 +41,7 @@ public class Player : CBC {
 
       // shoot if this player is the local player and when space is pressed
       if (this.playerId == config.localPlayerId) {
-        this.OnUpdate.AddListener(() => {
+        this.onUpdate.AddListener(() => {
           if (rotate && Input.GetKeyDown(KeyCode.Space)) {
             // stop rotation until we got the server ack
             rotate = false;
@@ -66,7 +67,7 @@ public class Player : CBC {
       var useMockServer = config.serverUrl == "";
       if (useMockServer && this.playerId != config.localPlayerId) {
         var timeout = config.mockPlayerShootInterval;
-        this.OnUpdate.AddListener(() => {
+        this.onUpdate.AddListener(() => {
           timeout -= Time.deltaTime;
           if (timeout < 0 && rotate) {
             var angle = cannon.localEulerAngles.z;
@@ -91,7 +92,7 @@ public class Player : CBC {
       }
     });
     // text shake
-    this.OnUpdate.AddListener(() => {
+    this.onUpdate.AddListener(() => {
       if (text.transform.localScale.x > textScale.x) {
         text.transform.localScale -= textScale * config.scoreShakeSpeed * Time.deltaTime;
       } else {
@@ -122,7 +123,7 @@ public class Player : CBC {
       }
     });
     // laser fade
-    this.OnUpdate.AddListener(() => {
+    this.onUpdate.AddListener(() => {
       if (lr.positionCount > 0 && lr.startWidth > 0) {
         lr.startWidth -= Time.deltaTime * config.laserFadeSpeed;
         lr.endWidth -= Time.deltaTime * config.laserFadeSpeed;
@@ -130,7 +131,7 @@ public class Player : CBC {
     });
 
     // laser power
-    this.OnUpdate.AddListener(() => {
+    this.onUpdate.AddListener(() => {
       if (laserPowerSr.enabled) {
         // grow
         if (laserPower.transform.localScale.x >= laserPowerScale.x) {
@@ -141,7 +142,7 @@ public class Player : CBC {
         // randomly float
         var randomX = Random.Range(0, Mathf.PI);
         var randomY = Random.Range(0, Mathf.PI);
-        this.OnUpdate.AddListener(() => {
+        this.onUpdate.AddListener(() => {
           laserPower.localPosition = laserPowerInitLocalPos + new Vector3(Mathf.Sin(Time.time * config.laserPowerMoveSpeed + randomX), Mathf.Sin(Time.time * config.laserPowerMoveSpeed + randomY), 0) * config.laserPowerMoveRange;
         });
       }

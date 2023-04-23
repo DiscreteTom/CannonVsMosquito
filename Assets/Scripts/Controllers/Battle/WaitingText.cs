@@ -1,4 +1,4 @@
-using DT.General;
+using DT.UniStart;
 
 public class WaitingText : CBC {
   void Start() {

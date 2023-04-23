@@ -1,4 +1,4 @@
-using DT.General;
+using DT.UniStart;
 using NativeWebSocket;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ public class WebSocketManager : CBC {
     if (config.serverUrl == "") return; // using mock server
 
     this.websocket = new WebSocket(config.serverUrl);
-    this.OnUpdate.AddListener(() => {
+    this.onUpdate.AddListener(() => {
 #if !UNITY_WEBGL || UNITY_EDITOR
       websocket.DispatchMessageQueue();
 #endif

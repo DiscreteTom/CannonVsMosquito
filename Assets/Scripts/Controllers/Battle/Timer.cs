@@ -1,4 +1,4 @@
-using DT.General;
+using DT.UniStart;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class Timer : CBC {
     eb.AddListener("game.start", (GameStartEvent _) => {
       var timeout = (float)config.gameTimeout;
       text.text = timeout.ToString();
-      this.OnUpdate.AddListener(() => {
+      this.onUpdate.AddListener(() => {
         timeout -= Time.deltaTime;
         if (timeout > -1)
           text.text = Mathf.CeilToInt(timeout).ToString();

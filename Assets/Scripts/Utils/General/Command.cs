@@ -1,3 +1,5 @@
+using DT.UniStart;
+
 namespace DT.General {
   public interface ICommand<T> {
     void Exec(T core);
