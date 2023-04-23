@@ -1,8 +1,17 @@
 # CHANGELOG
 
+## v0.1.6
+
+Apply `UniStart` and `UniUtils`. Optimize code.
+
+## v0.1.5
+
+- Feat: show error message.
+- Fix: canvas scale with screen size.
+
 ## v0.1.4
 
-- Apply `UniStart` and `UniUtils`. Optimize code.
+Use TryDeserialize to catch errors.
 
 ## v0.1.3
 
