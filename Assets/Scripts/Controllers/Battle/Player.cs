@@ -1,5 +1,5 @@
-using DT.General;
 using DT.UniStart;
+using DT.UniUtils;
 using TMPro;
 using UnityEngine;
 
