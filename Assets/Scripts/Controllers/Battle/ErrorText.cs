@@ -3,7 +3,7 @@ using TMPro;
 
 public class ErrorText : CBC {
   void Start() {
-    var eb = this.Get<EventBus>();
+    var eb = this.Get<IEventBus>();
     var text = this.GetComponent<TMP_Text>();
 
     text.text = "";

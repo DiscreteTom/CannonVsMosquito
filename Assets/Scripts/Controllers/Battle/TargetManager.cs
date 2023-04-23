@@ -6,7 +6,7 @@ using UnityEngine;
 public class TargetManager : CBC {
   void Start() {
     var config = this.Get<Config>();
-    var eb = this.Get<EventBus>();
+    var eb = this.Get<IEventBus>();
     var targetDict = new Dictionary<int, GameObject>(); // id -> target
 
     eb.AddListener("game.start", (GameStartEvent e) => {

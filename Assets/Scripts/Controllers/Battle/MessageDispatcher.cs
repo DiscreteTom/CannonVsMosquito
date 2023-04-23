@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MessageDispatcher : CBC {
   void Start() {
-    var eb = this.Get<EventBus>();
+    var eb = this.Get<IEventBus>();
     var config = this.Get<Config>();
     var useMockServer = config.serverUrl == "";
 

@@ -6,7 +6,7 @@ public class WebSocketManager : CBC {
   WebSocket websocket = null;
 
   async void Start() {
-    var eb = this.Get<EventBus>();
+    var eb = this.Get<IEventBus>();
     var config = this.Get<Config>();
 
     if (config.serverUrl == "") return; // using mock server

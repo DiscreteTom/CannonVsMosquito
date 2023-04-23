@@ -3,7 +3,7 @@ using TMPro;
 
 public class GameOver : CBC {
   void Start() {
-    var eb = this.Get<EventBus>();
+    var eb = this.Get<IEventBus>();
 
     eb.AddListener("game.over", (GameOverEvent e) => {
       var textTransform = this.transform.transform.Find("GameOverText");

@@ -7,7 +7,7 @@ public class Player : CBC {
   [SerializeField] int playerId;
 
   void Start() {
-    var eb = this.Get<EventBus>();
+    var eb = this.Get<IEventBus>();
     var config = this.Get<Config>();
     var cannon = this.transform.Find("Cannon");
     var animator = cannon.GetComponent<Animator>();
