@@ -12,7 +12,7 @@ public class MessageDispatcher : CBC {
 
     if (!useMockServer) {
       // create or join server when the websocket is connected
-      eb.AddListener("ws.connected", () => {
+      this.Watch(eb, "ws.connected", () => {
         if (config.localPlayerId == 0) {
           // create room
           eb.Invoke("ws.send", JsonUtility.ToJson(new CreateRoomAction {
@@ -29,7 +29,7 @@ public class MessageDispatcher : CBC {
       });
 
       // process game events
-      eb.AddListener("local.shoot", (float x, float y, float angle, int playerId) => {
+      this.Watch(eb, "local.shoot", (float x, float y, float angle, int playerId) => {
         eb.Invoke("ws.send", JsonUtility.ToJson(new ShootAction {
           action = "shoot",
           origin = new Origin {
@@ -41,7 +41,7 @@ public class MessageDispatcher : CBC {
       });
 
       // listen for messages from the server and invoke game events
-      eb.AddListener("ws.message", (string str) => {
+      this.Watch(eb, "ws.message", (string str) => {
         var raw = TryDeserialize<ServerMessage>(str);
         if (raw.type == "error") {
           var msg = TryDeserialize<ErrorEvent>(raw.msg);
@@ -87,7 +87,7 @@ public class MessageDispatcher : CBC {
       }, config.mockServerLatency);
 
       // handle shoot events
-      eb.AddListener("local.shoot", (float x, float y, float angle, int playerId) => {
+      this.Watch(eb, "local.shoot", (float x, float y, float angle, int playerId) => {
         this.Invoke(() => {
           // calculate hit
           var hit = new List<int>();

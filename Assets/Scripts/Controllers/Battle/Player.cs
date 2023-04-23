@@ -18,7 +18,7 @@ public class Player : CBC {
     var laserPowerInitLocalPos = laserPower.localPosition;
     laserPowerSr.enabled = false; // disable at start
 
-    eb.AddListener("game.start", (GameStartEvent _) => {
+    this.Watch(eb, "game.start", (GameStartEvent _) => {
       animator.SetBool("rotating", rotate);
 
       bool clockwise = false;
@@ -58,7 +58,7 @@ public class Player : CBC {
       }
 
       // handle game over
-      eb.AddListener("game.over", (GameOverEvent e) => {
+      this.Watch(eb, "game.over", (GameOverEvent e) => {
         rotate = false;
         animator.SetBool("rotating", rotate);
       });
@@ -82,7 +82,7 @@ public class Player : CBC {
     var text = this.transform.Find("Canvas/ScoreText").GetComponent<TMP_Text>();
     var score = 0;
     var textScale = text.transform.localScale; // save initial scale
-    eb.AddListener("game.shoot", (PlayerShootEvent e) => {
+    this.Watch(eb, "game.shoot", (PlayerShootEvent e) => {
       if (e.player == this.playerId) {
         score += e.hit.Length;
         text.text = score.ToString();
@@ -104,7 +104,7 @@ public class Player : CBC {
     var lr = this.gameObject.AddComponent<LineRenderer>();
     lr.material = config.laserMaterial;
     lr.sortingOrder = -1;
-    eb.AddListener("game.shoot", (PlayerShootEvent e) => {
+    this.Watch(eb, "game.shoot", (PlayerShootEvent e) => {
       if (e.player == this.playerId) {
         lr.positionCount = 2;
         lr.SetPosition(0, this.transform.position);
@@ -147,13 +147,13 @@ public class Player : CBC {
         });
       }
     });
-    eb.AddListener("game.shoot", (PlayerShootEvent e) => {
+    this.Watch(eb, "game.shoot", (PlayerShootEvent e) => {
       if (e.player == this.playerId) {
         // disable laser power
         laserPowerSr.enabled = false;
       }
     });
-    eb.AddListener("game.over", (GameOverEvent e) => {
+    this.Watch(eb, "game.over", (GameOverEvent e) => {
       laserPowerSr.enabled = false;
     });
   }
