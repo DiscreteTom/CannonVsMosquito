@@ -3,34 +3,32 @@ using NativeWebSocket;
 using UnityEngine;
 
 public class WebSocketManager : CBC {
-  WebSocket websocket = null;
-
   async void Start() {
     var eb = this.Get<IEventBus>();
     var config = this.Get<Config>();
 
     if (config.serverUrl == "") return; // using mock server
 
-    this.websocket = new WebSocket(config.serverUrl);
+    var websocket = new WebSocket(config.serverUrl);
     this.onUpdate.AddListener(() => {
 #if !UNITY_WEBGL || UNITY_EDITOR
       websocket.DispatchMessageQueue();
 #endif
     });
 
-    this.websocket.OnOpen += () => {
+    websocket.OnOpen += () => {
       eb.Invoke("ws.connected");
       Debug.Log("Connection open!");
     };
-    this.websocket.OnError += (e) => {
+    websocket.OnError += (e) => {
       eb.Invoke("ws.error", e);
       Debug.Log("Error! " + e);
     };
-    this.websocket.OnClose += (e) => {
+    websocket.OnClose += (e) => {
       eb.Invoke("ws.disconnected", e);
       Debug.Log("Connection closed!");
     };
-    this.websocket.OnMessage += (bytes) => {
+    websocket.OnMessage += (bytes) => {
       // getting the message as a string
       var message = System.Text.Encoding.UTF8.GetString(bytes);
       eb.Invoke("ws.message", message);
@@ -44,13 +42,13 @@ public class WebSocketManager : CBC {
       }
     });
 
-    // waiting for messages
-    await this.websocket.Connect();
-  }
+    this.onApplicationQuit.AddListener(() => {
+      if (websocket != null) {
+        websocket.Close();
+      }
+    });
 
-  private async void OnApplicationQuit() {
-    if (websocket != null) {
-      await websocket.Close();
-    }
+    // waiting for messages
+    await websocket.Connect();
   }
 }

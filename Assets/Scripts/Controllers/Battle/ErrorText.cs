@@ -8,7 +8,7 @@ public class ErrorText : CBC {
 
     text.text = "";
 
-    eb.AddListener("game.error", (string msg) => text.text = $"Error: {msg}");
-    eb.AddListener("ws.error", (string msg) => text.text = $"Error: {msg}");
+    this.Watch(eb, "game.error", (string msg) => text.text = $"Error: {msg}");
+    this.Watch(eb, "ws.error", (string msg) => text.text = $"Error: {msg}");
   }
 }

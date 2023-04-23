@@ -5,7 +5,7 @@ public class GameOver : CBC {
   void Start() {
     var eb = this.Get<IEventBus>();
 
-    eb.AddListener("game.over", (GameOverEvent e) => {
+    this.Watch(eb, "game.over", (GameOverEvent e) => {
       var textTransform = this.transform.transform.Find("GameOverText");
       textTransform.gameObject.SetActive(true);
       textTransform.GetComponent<TMP_Text>().text = "Player " + (e.winner + 1) + " wins";

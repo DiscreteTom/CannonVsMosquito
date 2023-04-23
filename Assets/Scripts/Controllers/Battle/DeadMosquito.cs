@@ -14,9 +14,9 @@ public class DeadMosquito : CBC {
 
     // add an up force
     rb.AddForce(Vector2.up * config.deadTargetUpForce, ForceMode2D.Impulse);
-  }
 
-  void OnBecameInvisible() {
-    Destroy(this.gameObject);
+    this.onBecameInvisible.AddListener(() => {
+      Destroy(this.gameObject);
+    });
   }
 }

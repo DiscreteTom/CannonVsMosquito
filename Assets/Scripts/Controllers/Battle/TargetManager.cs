@@ -9,7 +9,7 @@ public class TargetManager : CBC {
     var eb = this.Get<IEventBus>();
     var targetDict = new Dictionary<int, GameObject>(); // id -> target
 
-    eb.AddListener("game.start", (GameStartEvent e) => {
+    this.Watch(eb, "game.start", (GameStartEvent e) => {
       e.targets.ForEach(t => {
         var target = Instantiate(config.targetPrefab);
         target.transform.position = new Vector3(t.x, t.y, 0);
@@ -17,7 +17,7 @@ public class TargetManager : CBC {
       });
     });
 
-    eb.AddListener("game.newTarget", (NewTargetEvent e) => {
+    this.Watch(eb, "game.newTarget", (NewTargetEvent e) => {
       e.targets.ForEach(t => {
         var target = Instantiate(config.targetPrefab);
         target.transform.position = new Vector3(t.x, t.y, 0);
@@ -25,7 +25,7 @@ public class TargetManager : CBC {
       });
     });
 
-    eb.AddListener("game.shoot", (PlayerShootEvent e) => {
+    this.Watch(eb, "game.shoot", (PlayerShootEvent e) => {
       e.hit.ForEach(id => {
         var go = targetDict[id];
         Instantiate(config.deadTargetPrefab, go.transform.position, Quaternion.identity);
@@ -34,7 +34,7 @@ public class TargetManager : CBC {
       });
     });
 
-    eb.AddListener("game.over", (GameOverEvent _) => {
+    this.Watch(eb, "game.over", (GameOverEvent _) => {
       targetDict.Values.ForEach((g) => Destroy(g));
       targetDict.Clear();
     });

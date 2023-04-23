@@ -8,7 +8,7 @@ public class Timer : CBC {
     var text = this.GetComponent<TMP_Text>();
     var config = this.Get<Config>();
 
-    eb.AddListener("game.start", (GameStartEvent _) => {
+    this.Watch(eb, "game.start", (GameStartEvent _) => {
       var timeout = (float)config.gameTimeout;
       text.text = timeout.ToString();
       this.onUpdate.AddListener(() => {
