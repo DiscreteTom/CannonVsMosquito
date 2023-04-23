@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.discretetom.unistart": {
+      "version": "git@github.com:DiscreteTom/UniStart.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "918bfa252584ccd2a534df2f3be1234d00ffc9e0"
+    },
+    "com.discretetom.uniutils": {
+      "version": "git@github.com:DiscreteTom/UniUtils.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "59ab9bb67429a89474d09f46f52a08701f6b073c"
+    },
     "com.endel.nativewebsocket": {
       "version": "https://github.com/endel/NativeWebSocket.git#upm",
       "depth": 0,
