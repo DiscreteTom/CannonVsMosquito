@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.4
+
+- Apply `UniStart` and `UniUtils`. Optimize code.
+
 ## v0.1.3
 
 - Set `C++ compiler configuration` to `Release` instead of `Debug`.
