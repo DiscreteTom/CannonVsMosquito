@@ -1,14 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace DT.General {
+namespace DT.UniUtils {
   public static class IEnumerableExtension {
-    public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action) {
-      foreach (T item in enumerable) {
-        action(item);
-      }
-    }
-
     public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T, int> action) {
       int i = 0;
       foreach (T item in enumerable) {
@@ -17,12 +11,8 @@ namespace DT.General {
       }
     }
 
-    public static R[] Map<T, R>(this IEnumerable<T> enumerable, Func<T, R> action) {
-      List<R> list = new List<R>();
-      foreach (T item in enumerable) {
-        list.Add(action(item));
-      }
-      return list.ToArray();
+    public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action) {
+      enumerable.ForEach((T item, int i) => action(item));
     }
 
     public static R[] Map<T, R>(this IEnumerable<T> enumerable, Func<T, int, R> action) {
@@ -33,6 +23,10 @@ namespace DT.General {
         i++;
       }
       return list.ToArray();
+    }
+
+    public static R[] Map<T, R>(this IEnumerable<T> enumerable, Func<T, R> action) {
+      return enumerable.Map((T item, int i) => action(item));
     }
 
     public static T[] Shuffle<T>(this IEnumerable<T> enumerable) {
