@@ -1,18 +1,18 @@
 {
   "dependencies": {
     "com.discretetom.unistart": {
-      "version": "git@github.com:DiscreteTom/UniStart.git",
+      "version": "https://github.com/DiscreteTom/UniStart.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "918bfa252584ccd2a534df2f3be1234d00ffc9e0"
+      "hash": "71dc4021787a74329d1f834f0eeb59e7c76964f3"
     },
     "com.discretetom.uniutils": {
-      "version": "git@github.com:DiscreteTom/UniUtils.git",
+      "version": "https://github.com/DiscreteTom/UniUtils.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "fec43e58e0b938c90604482e504d0dd0b430de39"
+      "hash": "0bd2ced634406cde5d0147440bbf3eec9cd0022d"
     },
     "com.endel.nativewebsocket": {
       "version": "https://github.com/endel/NativeWebSocket.git#upm",
