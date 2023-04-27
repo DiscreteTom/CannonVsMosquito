@@ -1,5 +1,9 @@
 # Cannon VS Mosquito
 
+![GitHub](https://img.shields.io/github/license/DiscreteTom/UniStart?style=flat-square)
+![Platform support](https://img.shields.io/badge/platform-WebGL-green?style=flat-square)
+![Built with Unity3D](https://img.shields.io/badge/Built%20with-Unity3D-lightgrey?style=flat-square)
+
 A demo game made with Unity3D.
 
 ![title](./img/title.png)
