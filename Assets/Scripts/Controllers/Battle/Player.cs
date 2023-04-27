@@ -92,12 +92,13 @@ public class Player : CBC {
 
     // update player score text
     var text = this.transform.Find("Canvas/ScoreText").GetComponent<TMP_Text>();
-    var score = 0;
     var textScale = text.transform.localScale; // save initial scale
+    this.Watch(model.scores, () => {
+      text.text = model.scores[this.playerId].ToString();
+    });
     this.Watch(eb, "game.shoot", (PlayerShootEvent e) => {
       if (e.player == this.playerId) {
-        score += e.hit.Length;
-        text.text = score.ToString();
+        model.scores[this.playerId] += e.hit.Length;
         text.transform.localScale = textScale * config.scoreShakeScale;
         // calibrate shooter angle
         cannon.localEulerAngles = new Vector3(0, 0, e.angle - 90);
