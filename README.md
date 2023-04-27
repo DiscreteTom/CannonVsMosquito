@@ -2,6 +2,8 @@
 
 A demo game made with Unity3D.
 
+![title](./img/title.png)
+
 ## How to Play
 
 ### Start the Client
