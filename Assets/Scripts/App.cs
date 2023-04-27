@@ -6,6 +6,14 @@ public class App : Entry {
 
   void Awake() {
     this.Add(this.config);
-    this.Add<IEventBus>(new DebugEventBus());
+    var eb = this.Add<IEventBus>(new DebugEventBus());
+    var model = this.Add<Model>();
+
+    eb.AddListener("game.start", (GameStartEvent _) => {
+      model.state.Value = GameState.PLAYING;
+    });
+    eb.AddListener("game.over", (GameOverEvent _) => {
+      model.state.Value = GameState.OVER;
+    });
   }
 }

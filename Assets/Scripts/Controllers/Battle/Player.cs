@@ -9,9 +9,10 @@ public class Player : CBC {
   void Start() {
     var eb = this.Get<IEventBus>();
     var config = this.Get<Config>();
+    var model = this.Get<Model>();
     var cannon = this.transform.Find("Cannon");
     var animator = cannon.GetComponent<Animator>();
-    bool rotate = true;
+    var rotate = new Watch<bool>(true);
     var laserPower = cannon.Find("LaserPower");
     var laserPowerScale = laserPower.transform.localScale;
     var laserPowerSr = laserPower.GetComponent<SpriteRenderer>();
@@ -24,13 +25,20 @@ public class Player : CBC {
       cannonSr.color = Color.gray;
     }
 
-    this.Watch(eb, "game.start", (GameStartEvent _) => {
-      animator.SetBool("rotating", rotate);
+    // update animator when rotate value changed
+    rotate.AddListener(v => {
+      animator.SetBool("rotating", rotate.Value);
+    });
+
+    // handle game start
+    this.Watch(model.state, (GameState state) => {
+      if (state != GameState.PLAYING) return;
+      animator.SetBool("rotating", true); // start rotating
 
       bool clockwise = false;
       // start rotation within angle range
       this.onUpdate.AddListener(() => {
-        if (!rotate) return;
+        if (!rotate.Value || model.state.Value != GameState.PLAYING) return;
 
         if (clockwise) {
           cannon.Rotate(0, 0, -config.cannonRotationSpeed * Time.deltaTime);
@@ -48,10 +56,9 @@ public class Player : CBC {
       // shoot if this player is the local player and when space is pressed
       if (this.playerId == config.localPlayerId) {
         this.onUpdate.AddListener(() => {
-          if (rotate && Input.GetKeyDown(KeyCode.Space)) {
+          if (rotate.Value && Input.GetKeyDown(KeyCode.Space) && model.state.Value == GameState.PLAYING) {
             // stop rotation until we got the server ack
-            rotate = false;
-            animator.SetBool("rotating", rotate);
+            rotate.Value = false;
 
             // enable laser power
             laserPowerSr.enabled = true;
@@ -65,8 +72,7 @@ public class Player : CBC {
 
       // handle game over
       this.Watch(eb, "game.over", (GameOverEvent e) => {
-        rotate = false;
-        animator.SetBool("rotating", rotate);
+        rotate.Value = false;
       });
 
       // mock player shoot
@@ -75,7 +81,7 @@ public class Player : CBC {
         var timeout = config.mockPlayerShootInterval;
         this.onUpdate.AddListener(() => {
           timeout -= Time.deltaTime;
-          if (timeout < 0 && rotate) {
+          if (timeout < 0 && rotate.Value) {
             var angle = cannon.localEulerAngles.z;
             eb.Invoke("local.shoot", this.transform.position.x, this.transform.position.y, (angle + 90) % 360, this.playerId);
             timeout = config.mockPlayerShootInterval;
@@ -123,8 +129,7 @@ public class Player : CBC {
         this.Invoke(() => {
           lr.positionCount = 0;
           // start rotation again
-          rotate = true;
-          animator.SetBool("rotating", rotate);
+          rotate.Value = true;
         }, config.laserWidth / config.laserFadeSpeed); // clear laser points
       }
     });
