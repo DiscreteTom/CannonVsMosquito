@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.1.7
+
+- Feat: add responsive Model.
+- Feat: add blinking help in battle scene.
+- Feat: set non-local player to gray.
+- Feat: better welcome scene.
+
 ## v0.1.6
 
 Apply `UniStart` and `UniUtils`. Optimize code.
