@@ -18,6 +18,12 @@ public class Player : CBC {
     var laserPowerInitLocalPos = laserPower.localPosition;
     laserPowerSr.enabled = false; // disable at start
 
+    // if this player is not the local player, set color to light gray
+    if (this.playerId != config.localPlayerId) {
+      var cannonSr = cannon.GetComponent<SpriteRenderer>();
+      cannonSr.color = Color.gray;
+    }
+
     this.Watch(eb, "game.start", (GameStartEvent _) => {
       animator.SetBool("rotating", rotate);
 
