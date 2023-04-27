@@ -6,6 +6,7 @@
 - Feat: add blinking help in battle scene.
 - Feat: set non-local player to gray.
 - Feat: better welcome scene.
+- Feat: add cloud.
 
 ## v0.1.6
 
