@@ -19,8 +19,8 @@
       <div id="unity-warning"> </div>
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
         <div id="unity-build-title">{{{ PRODUCT_NAME }}}</div>
+        <div id="unity-fullscreen-button"></div>
       </div>
     </div>
     <script>
@@ -30,6 +30,7 @@
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var warningBanner = document.querySelector("#unity-warning");
+      const footer = document.querySelector("#unity-footer");
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -102,7 +103,7 @@
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
       }
       const WIDTH = {{{ WIDTH }}};
-      const HEIGHT = {{{ HEIGHT }}};
+      const HEIGHT = {{{ HEIGHT }}} + footer.clientHeight;
       const widthRatio = window.innerWidth / WIDTH;
       const heightRatio = window.innerHeight / HEIGHT;
       const scale = Math.min(widthRatio, heightRatio);
