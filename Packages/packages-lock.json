@@ -12,7 +12,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "9c14e6d23198a120775674eaaff28aa190f37e50"
+      "hash": "c5f00abd53684f7604a71a1da5d32c011b408365"
     },
     "com.endel.nativewebsocket": {
       "version": "https://github.com/endel/NativeWebSocket.git#upm",
