@@ -21,7 +21,9 @@ public class App : Entry {
     if (Application.platform == RuntimePlatform.WebGLPlayer) {
       // use next update to wait for listener to be registered
       this.onNextUpdate.AddListener(() => {
-        eb.Invoke("set.input.serverUrl", HttpUtility.ParseQueryString(Application.absoluteURL.Split('?')[1]).Get("serverUrl"));
+        var serverUrl = HttpUtility.ParseQueryString(Application.absoluteURL.Split('?')[1]).Get("serverUrl");
+        if (serverUrl != null)
+          eb.Invoke("set.input.serverUrl", serverUrl);
       });
     }
   }

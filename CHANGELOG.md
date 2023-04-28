@@ -2,6 +2,8 @@
 
 ## v0.1.9
 
+- Fix: allow empty server url.
+
 ## v0.1.8
 
 - Feat: click to shoot.
