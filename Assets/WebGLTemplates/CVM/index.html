@@ -90,8 +90,8 @@
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
-        container.className = "unity-mobile";
-        canvas.className = "unity-mobile";
+        // container.className = "unity-mobile";
+        // canvas.className = "unity-mobile";
 
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
@@ -100,10 +100,16 @@
         // unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-
-        canvas.style.width = "{{{ WIDTH }}}px";
-        canvas.style.height = "{{{ HEIGHT }}}px";
       }
+      const WIDTH = {{{ WIDTH }}};
+      const HEIGHT = {{{ HEIGHT }}};
+      const widthRatio = window.innerWidth / WIDTH;
+      const heightRatio = window.innerHeight / HEIGHT;
+      const scale = Math.min(widthRatio, heightRatio);
+      const scaledWidth = Math.floor(WIDTH * scale);
+      const scaledHeight = Math.floor(HEIGHT * scale);
+      canvas.style.width = `${scaledWidth}px`;
+      canvas.style.height = `${scaledHeight}px`;
 
 #if BACKGROUND_FILENAME
       canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";

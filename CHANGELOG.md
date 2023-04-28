@@ -2,6 +2,7 @@
 
 ## v0.1.9
 
+- Feat: responsive canvas size.
 - Fix: allow empty server url.
 
 ## v0.1.8
