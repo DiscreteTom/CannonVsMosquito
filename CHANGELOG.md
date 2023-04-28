@@ -3,6 +3,7 @@
 ## v0.1.8
 
 - Feat: click to shoot.
+- Fix: cloud will have consistent behaviour among all clients.
 
 ## v0.1.7
 
