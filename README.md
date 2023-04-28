@@ -24,6 +24,8 @@ When the game is started, you will be asked to input the server URL.
   - The maximum number of players in a room is 2.
 - If you are developing the server, you can use [this CLI tool](https://github.com/DiscreteTom/ws-server) to mock a server.
 
+> **Note**: You can also pass the server URL in the query string: `https://discretetom.github.io/CannonVsMosquito/?serverUrl=xxx`.
+
 ### Play the Game
 
 - If you are the host of the room, you will control the left cannon. Otherwise, you will control the right cannon.
