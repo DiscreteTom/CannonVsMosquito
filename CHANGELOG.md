@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.8
+
+- Feat: click to shoot.
+
 ## v0.1.7
 
 - Feat: add responsive Model.

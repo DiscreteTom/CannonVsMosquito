@@ -56,7 +56,7 @@ public class Player : CBC {
       // shoot if this player is the local player and when space is pressed
       if (this.playerId == config.localPlayerId) {
         this.onUpdate.AddListener(() => {
-          if (rotate.Value && Input.GetKeyDown(KeyCode.Space) && model.state.Value == GameState.PLAYING) {
+          if (rotate.Value && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && model.state.Value == GameState.PLAYING) {
             // stop rotation until we got the server ack
             rotate.Value = false;
 
