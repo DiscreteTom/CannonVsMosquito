@@ -150,13 +150,6 @@ public class Player : CBC {
           laserPower.transform.localScale = laserPowerScale;
         }
         laserPower.transform.localScale += laserPowerScale * config.laserPowerGrowSpeed * Time.deltaTime;
-
-        // randomly float
-        var randomX = Random.Range(0, Mathf.PI);
-        var randomY = Random.Range(0, Mathf.PI);
-        this.onUpdate.AddListener(() => {
-          laserPower.localPosition = laserPowerInitLocalPos + new Vector3(Mathf.Sin(Time.time * config.laserPowerMoveSpeed + randomX), Mathf.Sin(Time.time * config.laserPowerMoveSpeed + randomY), 0) * config.laserPowerMoveRange;
-        });
       }
     });
     this.Watch(eb, "game.shoot", (PlayerShootEvent e) => {

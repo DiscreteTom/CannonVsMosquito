@@ -399,6 +399,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4699774542910087882}
   - component: {fileID: 38060550481318319}
+  - component: {fileID: 6061647456844819752}
   m_Layer: 0
   m_Name: LaserPower
   m_TagString: Untagged
@@ -473,3 +474,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6061647456844819752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4770173204554527554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd50ae1ec11c77940ac11e6e31634958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 0.05
+  shakeAtStart: 1
+  shakeZ: 0
