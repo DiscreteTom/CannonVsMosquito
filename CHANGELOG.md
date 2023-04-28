@@ -3,6 +3,7 @@
 ## v0.1.9
 
 - Feat: responsive canvas size.
+  - Remove footer.
 - Fix: allow empty server url.
 
 ## v0.1.8
