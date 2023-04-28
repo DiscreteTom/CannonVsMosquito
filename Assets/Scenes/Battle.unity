@@ -725,10 +725,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 647962096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e651bf3f5b82a144b9899c42c1707be1, type: 3}
+  m_Script: {fileID: 11500000, guid: e9f647a0ec095a94fa3dc27b3dcaa689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkSpeed: 2
+  speed: 2
 --- !u!1 &727288645
 GameObject:
   m_ObjectHideFlags: 0
