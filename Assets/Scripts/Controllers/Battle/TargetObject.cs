@@ -5,14 +5,6 @@ public class TargetObject : CBC {
   void Start() {
     var config = this.Get<Config>();
 
-    // grow up when created with config.initTargetGrowSpeed
-    this.transform.localScale = Vector3.zero;
-    this.onUpdate.AddListener(() => {
-      if (this.transform.localScale.x < 1)
-        this.transform.localScale += Vector3.one * config.initTargetGrowSpeed * Time.deltaTime;
-      else this.transform.localScale = Vector3.one;
-    });
-
     // float
     var position = this.transform.position;
     var randomX = Random.Range(0, Mathf.PI);

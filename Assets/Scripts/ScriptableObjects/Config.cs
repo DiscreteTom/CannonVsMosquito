@@ -30,7 +30,6 @@ public class Config : ScriptableObject {
   public float laserPowerMoveRange = 0.03f;
 
   [Header("Target")]
-  public float initTargetGrowSpeed = 5;
   public float targetFloatSpeed = 4;
   public float targetFloatRange = 0.03f;
 
