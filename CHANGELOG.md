@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v0.1.9
+
 ## v0.1.8
 
 - Feat: click to shoot.
