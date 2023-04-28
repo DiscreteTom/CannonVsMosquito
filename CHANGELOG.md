@@ -3,6 +3,7 @@
 ## v0.1.8
 
 - Feat: click to shoot.
+- Feat: read server url from url query string.
 - Fix: cloud will have consistent behaviour among all clients.
 
 ## v0.1.7
