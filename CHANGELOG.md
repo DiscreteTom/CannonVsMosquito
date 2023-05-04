@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.10
+
+Apply AIGC art assets.
+
 ## v0.1.9
 
 - Feat: responsive canvas size.
