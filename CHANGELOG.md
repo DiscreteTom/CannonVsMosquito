@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.11
+
+Fix: allow empty query string.
+
 ## v0.1.10
 
 Apply AIGC art assets.
