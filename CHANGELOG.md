@@ -3,6 +3,7 @@
 ## v0.1.12
 
 - Fix: server url from query string not working.
+- Fix: back button style.
 
 ## v0.1.11
 
