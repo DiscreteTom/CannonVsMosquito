@@ -16,6 +16,7 @@ public class ServerUrlInput : CBC {
     // listen event bus
     eb.AddListener("set.input.serverUrl", (string serverUrl) => {
       input.text = serverUrl;
+      config.serverUrl = serverUrl;
     });
   }
 }

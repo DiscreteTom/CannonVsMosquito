@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.12
+
+- Fix: server url from query string not working.
+
 ## v0.1.11
 
 Fix: allow empty query string.
