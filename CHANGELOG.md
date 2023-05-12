@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.13
+
+More debug output for target creation and destruction.
+
 ## v0.1.12
 
 - Fix: server url from query string not working.
