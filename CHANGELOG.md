@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.14
+
+- Feat: add `Fullscreen` button, only works in PC, and needed to click twice.
+
 ## v0.1.13
 
 More debug output for target creation and destruction.
