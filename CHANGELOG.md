@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.15
+
+Fix `Fullscreen` button not working.
+
 ## v0.1.14
 
 - Feat: add `Fullscreen` button, only works in PC, and needed to click twice.

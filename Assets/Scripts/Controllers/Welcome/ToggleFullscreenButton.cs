@@ -4,6 +4,6 @@ using UnityEngine.UI;
 
 public class ToggleFullscreenButton : CBC {
   void Start() {
-    this.onMouseDown.AddListener(() => Screen.fullScreen = !Screen.fullScreen);
+    this.GetComponent<Button>().onClick.AddListener(() => Screen.fullScreen = !Screen.fullScreen);
   }
 }
