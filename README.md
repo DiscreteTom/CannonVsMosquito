@@ -115,3 +115,9 @@ type GameOverEvent = {
   - Using NodeJS, can be deployed locally or on cloud.
 - Serverless: [yagrxu/aws-game-demo](https://github.com/yagrxu/aws-game-demo)
   - Using Terraform, AWS Lambda, DynamoDB, etc. With Event Driven Architecture.
+
+## Credit
+
+Thanks for these cool libs.
+
+- [kou-yeung/WebGLInput](https://github.com/kou-yeung/WebGLInput)
