@@ -111,5 +111,7 @@ type GameOverEvent = {
 
 ### Server Implementation
 
+- Local/Cloud: [sanxibengbeng/cannon-mos-ec2](https://github.com/sanxibengbeng/cannon-mos-ec2)
+  - Using NodeJS, can be deployed locally or on cloud.
 - Serverless: [yagrxu/aws-game-demo](https://github.com/yagrxu/aws-game-demo)
   - Using Terraform, AWS Lambda, DynamoDB, etc. With Event Driven Architecture.
