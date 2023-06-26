@@ -1029,7 +1029,6 @@ GameObject:
   - component: {fileID: 454171791}
   - component: {fileID: 454171795}
   - component: {fileID: 454171794}
-  - component: {fileID: 454171793}
   - component: {fileID: 454171792}
   m_Layer: 5
   m_Name: ToggleFullscreenButton
@@ -1069,18 +1068,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cbc6570404d50042aaf249a9538b9c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &454171793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454171790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:

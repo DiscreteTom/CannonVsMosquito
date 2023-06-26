@@ -1,9 +1,10 @@
-using DT.UniStart;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ToggleFullscreenButton : CBC {
-  void Start() {
-    this.GetComponent<Button>().onClick.AddListener(() => Screen.fullScreen = !Screen.fullScreen);
+public class ToggleFullscreenButton : Button {
+  public override void OnPointerDown(PointerEventData eventData) {
+    base.OnPointerDown(eventData);
+    Screen.fullScreen = !Screen.fullScreen;
   }
 }

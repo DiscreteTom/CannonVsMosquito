@@ -3,6 +3,8 @@
 ## v0.1.16
 
 - Feat: load room id from query string.
+- Fix: fullscreen button on PC needed to click twice.
+- Feat: fullscreen also works on mobile (tested on Android Chrome).
 
 ## v0.1.15
 
