@@ -21,13 +21,16 @@ public class App : Entry {
     if (Application.platform == RuntimePlatform.WebGLPlayer) {
       // use next update to wait for listener to be registered
       this.onNextUpdate.AddListener(() => {
-        var ss = Application.absoluteURL.Split('?');
+        // get url params
+        var ss = Application.absoluteURL.Split('?'); // strings
         if (ss.Length < 2) return;
         var queryString = ss[1];
         if (queryString == null) return;
-        var serverUrl = HttpUtility.ParseQueryString(queryString).Get("serverUrl");
-        if (serverUrl == null) return;
-        eb.Invoke("set.input.serverUrl", serverUrl);
+        var urlParams = HttpUtility.ParseQueryString(queryString);
+
+        // auto load server url
+        var serverUrl = urlParams.Get("serverUrl");
+        if (serverUrl != null) eb.Invoke("set.input.serverUrl", serverUrl);
       });
     }
   }
