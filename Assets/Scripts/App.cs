@@ -31,6 +31,10 @@ public class App : Entry {
         // auto load server url
         var serverUrl = urlParams.Get("serverUrl");
         if (serverUrl != null) eb.Invoke("set.input.serverUrl", serverUrl);
+
+        // auto load room id
+        var room = urlParams.Get("room");
+        if (room != null) eb.Invoke("set.input.roomId", room);
       });
     }
   }

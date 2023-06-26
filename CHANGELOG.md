@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.16
+
+- Feat: load room id from query string.
+
 ## v0.1.15
 
 Fix `Fullscreen` button not working.
