@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.17
+
+- Note: move to unity editor 2022.3.
+
 ## v0.1.16
 
 - Feat: load room id from query string.
