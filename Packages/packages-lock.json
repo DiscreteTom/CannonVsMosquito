@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "1d36bc164dccfeb6c25b3fb695a5de5f41bae2e6"
     },
+    "com.discretetom.uniutils": {
+      "version": "https://github.com/DiscreteTom/UniUtils.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "67f2d3ed75a83491ffc2d4bd9b34295ed32fce90"
+    },
     "com.endel.nativewebsocket": {
       "version": "https://github.com/endel/NativeWebSocket.git#upm",
       "depth": 0,

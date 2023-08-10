@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.discretetom.unistart": "https://github.com/DiscreteTom/UniStart.git",
+    "com.discretetom.uniutils": "https://github.com/DiscreteTom/UniUtils.git",
     "com.endel.nativewebsocket": "https://github.com/endel/NativeWebSocket.git#upm",
     "com.unity.ai.navigation": "1.1.4",
     "com.unity.collab-proxy": "2.0.5",
