@@ -1,5 +1,6 @@
 # Cannon VS Mosquito
 
+![GitHub tag (with filter)](https://img.shields.io/github/v/tag/DiscreteTom/CannonVsMosquito?style=flat-square&label=version)
 ![GitHub](https://img.shields.io/github/license/DiscreteTom/CannonVsMosquito?style=flat-square)
 ![Platform support](https://img.shields.io/badge/platform-WebGL-green?style=flat-square)
 ![Built with Unity3D](https://img.shields.io/badge/Built%20with-Unity3D-lightgrey?style=flat-square)
