@@ -30,7 +30,7 @@ When the game is started, you will be asked to input the server URL.
 
 - If you are the host of the room, you will control the left cannon. Otherwise, you will control the right cannon.
 - Use `Space` to shoot.
-- If you shoot a mosquito, you will get 1 point. The point is shown on the top of your cannon.
+- If you hit a mosquito, you will get 1 point. The point is shown on the top of your cannon.
 - A game will last 60 seconds. The player with more points wins.
 
 ## For Developers
@@ -43,20 +43,24 @@ After a websocket connection is established, here are the messages that will be 
 // ================= From client:
 type CreateRoomAction = {
   action: "create";
-  room: string;
+  room: string; // the room id
 };
 type JoinRoomAction = {
   action: "join";
-  room: string;
+  room: string; // the room id
 };
 type ShootAction = {
   action: "shoot";
   origin: {
-    x: number; // float
-    y: number; // float
+    // float, -5 for the left player(player 0), 5 for the right player(player 1)
+    x: number;
+    // float, -4 for both players
+    y: number;
   };
   // The angle is in degree, anti-clockwise, 0 is right, 90 is up.
   angle: number; // float
+  // there is no need to send the player id,
+  // the server will know it from the websocket connection.
 };
 
 // ================= From server:
@@ -70,14 +74,16 @@ type ErrorEvent = {
 type GameStartEvent = {
   // Provide a list of initial targets.
   targets: {
-    x: number; // float
-    y: number; // float
+    // float, [-5, 5]
+    x: number;
+    // float, [-3, 3]
+    y: number;
     id: number; // int
   }[];
 };
 type PlayerShootEvent = {
   hit: number[]; // int[], the ids of the targets that are hit
-  player: number; // int, 0 for left, 1 for right
+  player: number; // int, 0 for the left player, 1 for the right player
   origin: {
     x: number; // float
     y: number; // float
@@ -86,8 +92,10 @@ type PlayerShootEvent = {
 };
 type NewTargetEvent = {
   targets: {
-    x: number; // float
-    y: number; // float
+    // float, [-5, 5]
+    x: number;
+    // float, [-3, 3]
+    y: number;
     id: number; // int
   }[];
 };
@@ -102,6 +110,8 @@ type GameOverEvent = {
 - 2 players with the same room ID will be in the same game room.
 - When the 2 players are ready, game start, and the server will send the initial targets to the clients.
 - When a client shoot, the server will check if the shot hits any target. The server will broadcast the `player shoot` event to both clients. The clients will play the shoot animation after receiving the event.
+  - A shot can hit multiple targets.
+  - The diameter of the target is `1`. The width of the laser is `0.6`. You should calculate the distance between all targets and the laser to determine if a target is hit.
 - Players can shoot at any time instead of turn by turn. This is not a turn-based game.
   - So you might need to make atom operations on the game state in the server.
 - The server will add new targets periodically by sending the `new target` event to the clients.
