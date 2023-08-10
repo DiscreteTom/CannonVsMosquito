@@ -36,7 +36,7 @@ namespace Project.Scene.Battle {
         if (state != GameState.PLAYING) return;
         animator.SetBool("rotating", true); // start rotating
 
-        bool clockwise = false;
+        var clockwise = this.playerId == 0;
         // start rotation within angle range
         this.onUpdate.AddListener(() => {
           if (!rotate.Value || model.state.Value != GameState.PLAYING) return;
