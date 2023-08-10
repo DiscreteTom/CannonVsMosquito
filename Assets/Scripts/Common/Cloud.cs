@@ -1,4 +1,5 @@
 using DT.UniStart;
+using Project.Scene.Battle;
 
 public class Cloud : CBC {
   void Start() {
@@ -14,7 +15,7 @@ public class Cloud : CBC {
 
     // in play mode, reset position when game start
     var eb = this.Get<IEventBus>();
-    eb.AddListener("game.start", (GameStartEvent _) => {
+    eb.AddListener((GameStartEvent _) => {
       this.transform.SetPositionX(-15);
     });
   }

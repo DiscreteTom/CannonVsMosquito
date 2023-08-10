@@ -1,20 +1,26 @@
-using System.Web;
 using DT.UniStart;
 using UnityEngine;
 
-public class Battle : Entry {
-  [SerializeField] Config config;
+namespace Project.Scene.Battle {
+  public class Battle : Entry {
+    [SerializeField] Config config;
 
-  void Awake() {
-    this.Add(this.config);
-    var eb = this.Add<IEventBus>(new DebugEventBus());
-    var model = this.Add<Model>();
+    void Awake() {
+      var eb = new DebugEventBus();
+      var cb = new DebugCommandBus();
+      var model = new Model();
 
-    eb.AddListener("game.start", (GameStartEvent _) => {
-      model.state.Value = GameState.PLAYING;
-    });
-    eb.AddListener("game.over", (GameOverEvent _) => {
-      model.state.Value = GameState.OVER;
-    });
+      this.Add(this.config);
+      this.Add<IEventBus>(eb);
+      this.Add<ICommandBus>(cb);
+      this.Add(model);
+
+      eb.AddListener((GameStartEvent _) => {
+        model.state.Value = GameState.PLAYING;
+      });
+      eb.AddListener((GameOverEvent _) => {
+        model.state.Value = GameState.OVER;
+      });
+    }
   }
 }

@@ -1,9 +1,11 @@
 using DT.UniStart;
 
-public class WaitingText : CBC {
-  void Start() {
-    var eb = this.Get<IEventBus>();
+namespace Project.Scene.Battle {
+  public class WaitingText : CBC {
+    void Start() {
+      var eb = this.Get<IEventBus>();
 
-    this.Watch(eb, "game.start", (GameStartEvent _) => this.gameObject.SetActive(false));
+      this.Watch(eb, (GameStartEvent _) => this.gameObject.SetActive(false));
+    }
   }
 }
