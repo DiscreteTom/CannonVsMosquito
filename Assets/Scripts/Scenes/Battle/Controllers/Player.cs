@@ -11,6 +11,7 @@ namespace Project.Scene.Battle {
       var eb = this.Get<IEventBus>();
       var config = this.Get<Config>();
       var model = this.Get<Model>();
+      var cb = this.Get<ICommandBus>();
       var cannon = this.transform.Find("Cannon");
       var animator = cannon.GetComponent<Animator>();
       var rotate = new Watch<bool>(true);
@@ -32,8 +33,7 @@ namespace Project.Scene.Battle {
       });
 
       // handle game start
-      this.Watch(model.state, (GameState state) => {
-        if (state != GameState.PLAYING) return;
+      this.Watch(model.state, GameState.PLAYING, StateMachineEventType.OnEnter, () => {
         animator.SetBool("rotating", true); // start rotating
 
         var clockwise = this.playerId == 0;
@@ -94,13 +94,13 @@ namespace Project.Scene.Battle {
       // update player score text
       var text = this.transform.Find("Canvas/ScoreText").GetComponent<TMP_Text>();
       var textScale = text.transform.localScale; // save initial scale
-      this.Watch(model.scores, () => {
-        text.text = model.scores[this.playerId].ToString();
+      this.Watch(model.scores[this.playerId], () => {
+        text.text = model.scores[this.playerId].Value.ToString();
       });
       this.Watch(eb, (GameShootEvent ge) => {
         var e = ge.e;
         if (e.player == this.playerId) {
-          model.scores[this.playerId] += e.hit.Length;
+          cb.Push(new PlayerHitCommand(this.playerId, e.hit.Length));
           text.transform.localScale = textScale * config.scoreShakeScale;
           // calibrate shooter angle
           cannon.localEulerAngles = new Vector3(0, 0, e.angle - 90);
@@ -109,7 +109,7 @@ namespace Project.Scene.Battle {
       // text shake
       this.onUpdate.AddListener(() => {
         if (text.transform.localScale.x > textScale.x) {
-          text.transform.localScale -= textScale * config.scoreShakeSpeed * Time.deltaTime;
+          text.transform.localScale -= config.scoreShakeSpeed * Time.deltaTime * textScale;
         } else {
           text.transform.localScale = textScale;
         }
@@ -152,7 +152,7 @@ namespace Project.Scene.Battle {
           if (laserPower.transform.localScale.x >= laserPowerScale.x) {
             laserPower.transform.localScale = laserPowerScale;
           }
-          laserPower.transform.localScale += laserPowerScale * config.laserPowerGrowSpeed * Time.deltaTime;
+          laserPower.transform.localScale += config.laserPowerGrowSpeed * Time.deltaTime * laserPowerScale;
         }
       });
       this.Watch(eb, (GameShootEvent ge) => {

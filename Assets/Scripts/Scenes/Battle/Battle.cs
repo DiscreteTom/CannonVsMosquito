@@ -8,18 +8,18 @@ namespace Project.Scene.Battle {
     void Awake() {
       var eb = new DebugEventBus();
       var cb = new DebugCommandBus();
-      var model = new Model();
+      var model = new ModelManager(cb, eb);
 
       this.Add(this.config);
       this.Add<IEventBus>(eb);
       this.Add<ICommandBus>(cb);
-      this.Add(model);
+      this.Add<Model>(model);
 
       eb.AddListener((GameStartEvent _) => {
-        model.state.Value = GameState.PLAYING;
+        cb.Push(new GameStartCommand());
       });
       eb.AddListener((GameOverEvent _) => {
-        model.state.Value = GameState.OVER;
+        cb.Push(new GameOverCommand());
       });
     }
   }
