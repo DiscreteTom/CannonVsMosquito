@@ -5,7 +5,7 @@ namespace Project.Scene.Welcome {
   public class ServerUrlInput : CBC {
     void Start() {
       var config = this.Get<Config>();
-      var eb = this.Get<IEventBus>();
+      var el = this.Get<IEventListener>();
       var input = this.GetComponent<TMP_InputField>();
 
       // set initial value
@@ -15,7 +15,7 @@ namespace Project.Scene.Welcome {
       input.onEndEdit.AddListener((serverUrl) => config.serverUrl = serverUrl);
 
       // listen event bus
-      eb.AddListener((SetInputServerUrlEvent e) => {
+      el.AddListener((SetInputServerUrlEvent e) => {
         input.text = e.serverUrl;
         config.serverUrl = e.serverUrl;
       });

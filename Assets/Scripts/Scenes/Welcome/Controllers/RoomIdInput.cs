@@ -5,7 +5,7 @@ namespace Project.Scene.Welcome {
   public class RoomIdInput : CBC {
     void Start() {
       var config = this.Get<Config>();
-      var eb = this.Get<IEventBus>();
+      var el = this.Get<IEventListener>();
       var input = this.GetComponent<TMP_InputField>();
 
       // set initial value
@@ -15,7 +15,7 @@ namespace Project.Scene.Welcome {
       input.onEndEdit.AddListener((roomId) => config.roomId = roomId);
 
       // listen event bus
-      eb.AddListener((SetInputRoomId e) => {
+      el.AddListener((SetInputRoomId e) => {
         input.text = e.roomId;
         config.roomId = e.roomId;
       });

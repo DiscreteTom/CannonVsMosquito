@@ -7,8 +7,10 @@ namespace Project.Scene.Welcome {
     [SerializeField] Config config;
 
     void Awake() {
+      var eb = new DebugEventBus();
+
       this.Add(this.config);
-      var eb = this.Add<IEventBus>(new DebugEventBus());
+      this.Add<IEventListener>(eb);
 
       // read server url from query string
       if (Application.platform == RuntimePlatform.WebGLPlayer) {
