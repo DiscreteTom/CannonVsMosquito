@@ -8,7 +8,7 @@ namespace Project.Scene.Battle {
     [SerializeField] int playerId;
 
     void Start() {
-      var eb = this.Get<IEventBus>();
+      var eb = this.Get<IEventListener>();
       var config = this.Get<Config>();
       var model = this.Get<Model>();
       var cb = this.Get<ICommandBus>();
@@ -66,7 +66,7 @@ namespace Project.Scene.Battle {
               laserPower.transform.localScale = Vector3.zero;
 
               var angle = cannon.localEulerAngles.z;
-              eb.Invoke(new LocalShootEvent(this.transform.position.x, this.transform.position.y, (angle + 90) % 360, this.playerId));
+              cb.Push(new LocalShootCommand(new LocalShootEvent(this.transform.position.x, this.transform.position.y, (angle + 90) % 360, this.playerId)));
             }
           });
         }
@@ -84,7 +84,7 @@ namespace Project.Scene.Battle {
             timeout -= Time.deltaTime;
             if (timeout < 0 && rotate.Value) {
               var angle = cannon.localEulerAngles.z;
-              eb.Invoke(new LocalShootEvent(this.transform.position.x, this.transform.position.y, (angle + 90) % 360, this.playerId));
+              cb.Push(new LocalShootCommand(new LocalShootEvent(this.transform.position.x, this.transform.position.y, (angle + 90) % 360, this.playerId)));
               timeout = config.mockPlayerShootInterval;
             }
           });

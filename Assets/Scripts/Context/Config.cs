@@ -9,6 +9,7 @@ public class Config : ScriptableObject {
   public float newTargetInterval = 3f;
   public int newTargetCount = 3;
   public float mockPlayerShootInterval = 0.5f;
+  public bool usingMockServer => this.serverUrl == "";
 
   [Header("Game")]
   public string roomId;

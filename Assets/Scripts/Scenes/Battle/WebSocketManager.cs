@@ -3,15 +3,12 @@ using NativeWebSocket;
 using UnityEngine;
 
 namespace Project.Scene.Battle {
-  public class WebSocketManager : CBC {
-    async void Start() {
-      var eb = this.Get<IEventBus>();
-      var config = this.Get<Config>();
-
-      if (config.serverUrl == "") return; // using mock server
+  public class WebSocketManager {
+    public async void Start(Config config, IEventBus eb, ComposableBehaviour entry) {
+      if (config.usingMockServer) return;
 
       var websocket = new WebSocket(config.serverUrl);
-      this.onUpdate.AddListener(() => {
+      entry.onUpdate.AddListener(() => {
 #if !UNITY_WEBGL || UNITY_EDITOR
         websocket.DispatchMessageQueue();
 #endif
@@ -43,7 +40,7 @@ namespace Project.Scene.Battle {
         }
       });
 
-      this.onApplicationQuit.AddListener(() => {
+      entry.onApplicationQuit.AddListener(() => {
         websocket?.Close();
       });
 

@@ -4,7 +4,7 @@ using TMPro;
 namespace Project.Scene.Battle {
   public class GameOver : CBC {
     void Start() {
-      var eb = this.Get<IEventBus>();
+      var eb = this.Get<IEventListener>();
 
       this.Watch(eb, (GameOverEvent e) => {
         var textTransform = this.transform.transform.Find("GameOverText");

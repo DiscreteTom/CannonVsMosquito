@@ -7,7 +7,7 @@ namespace Project.Scene.Battle {
   public class TargetManager : CBC {
     void Start() {
       var config = this.Get<Config>();
-      var eb = this.Get<IEventBus>();
+      var eb = this.Get<IEventListener>();
       var targetDict = new Dictionary<int, GameObject>(); // id -> target
 
       this.Watch(eb, (GameStartEvent e) => {

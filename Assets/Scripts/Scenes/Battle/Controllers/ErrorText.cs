@@ -4,7 +4,7 @@ using TMPro;
 namespace Project.Scene.Battle {
   public class ErrorText : CBC {
     void Start() {
-      var eb = this.Get<IEventBus>();
+      var eb = this.Get<IEventListener>();
       var text = this.GetComponent<TMP_Text>();
 
       text.text = "";

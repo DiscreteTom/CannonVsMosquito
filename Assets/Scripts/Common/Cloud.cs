@@ -14,7 +14,7 @@ public class Cloud : CBC {
     });
 
     // in play mode, reset position when game start
-    var eb = this.Get<IEventBus>();
+    var eb = this.Get<IEventListener>();
     eb.AddListener((GameStartEvent _) => {
       this.transform.SetPositionX(-15);
     });

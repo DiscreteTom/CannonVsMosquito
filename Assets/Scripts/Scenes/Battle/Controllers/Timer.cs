@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.Scene.Battle {
   public class Timer : CBC {
     void Start() {
-      var eb = this.Get<IEventBus>();
+      var eb = this.Get<IEventListener>();
       var text = this.GetComponent<TMP_Text>();
       var config = this.Get<Config>();
 
