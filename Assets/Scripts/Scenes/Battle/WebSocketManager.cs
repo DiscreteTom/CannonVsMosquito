@@ -44,9 +44,7 @@ namespace Project.Scene.Battle {
       });
 
       this.onApplicationQuit.AddListener(() => {
-        if (websocket != null) {
-          websocket.Close();
-        }
+        websocket?.Close();
       });
 
       // waiting for messages
