@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
 using DT.UniStart;
-
 using UnityEngine;
 
 namespace Project.Scene.Battle {
   public class MessageDispatcher {
     public MessageDispatcher(Config config, ICommandBus cb, IEventBus eb) {
-      if (config.usingMockServer) return;
-
       // create or join server when the websocket is connected
       eb.AddListener((WebSocketConnected _) => {
         if (config.localPlayerId == 0) {
