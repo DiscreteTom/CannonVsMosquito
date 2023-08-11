@@ -3,7 +3,7 @@ using DT.UniStart;
 using UnityEngine;
 
 namespace Project.Scene.Welcome {
-  public class Welcome : Entry {
+  public class WelcomeEntry : Entry {
     [SerializeField] Config config;
 
     void Awake() {

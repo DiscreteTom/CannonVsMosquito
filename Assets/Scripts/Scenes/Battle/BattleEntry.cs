@@ -2,7 +2,7 @@ using DT.UniStart;
 using UnityEngine;
 
 namespace Project.Scene.Battle {
-  public class Battle : Entry {
+  public class BattleEntry : Entry {
     [SerializeField] Config config;
 
     void Awake() {
