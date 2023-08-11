@@ -3,8 +3,8 @@ using DT.UniStart;
 using UnityEngine;
 
 namespace Project.Scene.Battle {
-  public class MessageDispatcher {
-    public MessageDispatcher(Config config, ICommandBus cb, IEventBus eb) {
+  public static class MessageDispatcher {
+    public static void Apply(Config config, ICommandBus cb, IEventBus eb) {
       // create or join server when the websocket is connected
       eb.AddListener((WebSocketConnected _) => {
         if (config.localPlayerId == 0) {

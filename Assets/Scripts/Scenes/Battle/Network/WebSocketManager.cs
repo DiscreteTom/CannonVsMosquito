@@ -3,8 +3,8 @@ using NativeWebSocket;
 using UnityEngine;
 
 namespace Project.Scene.Battle {
-  public class WebSocketManager {
-    public void Start(Config config, IEventBus eb, ComposableBehaviour entry) {
+  public static class WebSocketManager {
+    public static void Apply(ComposableBehaviour entry, Config config, IEventBus eb) {
       var websocket = new WebSocket(config.serverUrl);
 
       // poll messages on every frame

@@ -23,10 +23,10 @@ namespace Project.Scene.Battle {
       });
 
       if (config.usingMockServer) {
-        new MockServer().Start(config, eb, this);
+        MockServer.Apply(this, config, eb);
       } else {
-        new MessageDispatcher(config, cb, eb);
-        new WebSocketManager().Start(config, eb, this);
+        MessageDispatcher.Apply(config, cb, eb);
+        WebSocketManager.Apply(this, config, eb);
       }
     }
   }

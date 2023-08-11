@@ -3,8 +3,8 @@ using DT.UniStart;
 using UnityEngine;
 
 namespace Project.Scene.Battle {
-  public class MockServer {
-    public void Start(Config config, IEventBus eb, ComposableBehaviour entry) {
+  public static class MockServer {
+    public static void Apply(ComposableBehaviour entry, Config config, IEventBus eb) {
       Debug.Log("Using mock server");
 
       var targets = new Dictionary<int, Target>();
