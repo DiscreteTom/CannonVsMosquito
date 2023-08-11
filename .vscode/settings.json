@@ -51,5 +51,6 @@
     "temp/": true,
     "Temp/": true
   },
-  "dotnet.defaultSolution": "CannonVsMosquito.sln"
+  "dotnet.defaultSolution": "CannonVsMosquito.sln",
+  "cSpell.words": ["WEBGL"]
 }

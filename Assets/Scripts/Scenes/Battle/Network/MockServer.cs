@@ -12,8 +12,8 @@ namespace Project.Scene.Battle {
       // init targets
       for (var i = 0; i < config.initTargetCount; ++i) {
         targets[i] = new Target {
-          x = UnityEngine.Random.Range(-5f, 5f),
-          y = UnityEngine.Random.Range(-3f, 3f),
+          x = Random.Range(-5f, 5f),
+          y = Random.Range(-3f, 3f),
           id = targetId,
         };
         ++targetId;

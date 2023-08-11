@@ -6,12 +6,15 @@ namespace Project.Scene.Battle {
   public class WebSocketManager {
     public void Start(Config config, IEventBus eb, ComposableBehaviour entry) {
       var websocket = new WebSocket(config.serverUrl);
+
+      // poll messages on every frame
       entry.onUpdate.AddListener(() => {
 #if !UNITY_WEBGL || UNITY_EDITOR
         websocket.DispatchMessageQueue();
 #endif
       });
 
+      // handle messages, invoke events
       websocket.OnOpen += () => {
         eb.Invoke<WebSocketConnected>();
         Debug.Log("Connection open!");
@@ -30,6 +33,7 @@ namespace Project.Scene.Battle {
         Debug.Log("OnMessage! " + message);
       };
 
+      // send messages
       eb.AddListener((WebSocketSendEvent e) => {
         var message = e.msg;
         if (websocket.State == WebSocketState.Open) {
@@ -38,6 +42,7 @@ namespace Project.Scene.Battle {
         }
       });
 
+      // close websocket on application quit
       entry.onApplicationQuit.AddListener(() => {
         websocket?.Close();
       });
