@@ -5,8 +5,6 @@ using UnityEngine;
 namespace Project.Scene.Battle {
   public class MockServer {
     public void Start(Config config, IEventBus eb, ComposableBehaviour entry) {
-      if (!config.usingMockServer) return;
-
       Debug.Log("Using mock server");
       var targets = new Dictionary<int, Target>();
       var targetId = 0;

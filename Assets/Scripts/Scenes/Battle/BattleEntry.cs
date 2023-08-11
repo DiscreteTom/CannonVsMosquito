@@ -9,9 +9,7 @@ namespace Project.Scene.Battle {
       var eb = new DebugEventBus();
       var cb = new DebugCommandBus();
       var model = new ModelManager(cb, eb);
-      var ws = new WebSocketManager();
       var md = new MessageDispatcher(config, cb, eb);
-      var ms = new MockServer();
 
       this.Add(this.config);
       this.Add<IEventListener>(eb);
@@ -25,8 +23,10 @@ namespace Project.Scene.Battle {
         cb.Push(new GameOverCommand());
       });
 
-      ws.Start(config, eb, this);
-      ms.Start(config, eb, this);
+      if (config.usingMockServer)
+        new MockServer().Start(config, eb, this);
+      else
+        new WebSocketManager().Start(config, eb, this);
     }
   }
 }

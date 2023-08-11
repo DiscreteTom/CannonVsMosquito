@@ -4,9 +4,7 @@ using UnityEngine;
 
 namespace Project.Scene.Battle {
   public class WebSocketManager {
-    public async void Start(Config config, IEventBus eb, ComposableBehaviour entry) {
-      if (config.usingMockServer) return;
-
+    public void Start(Config config, IEventBus eb, ComposableBehaviour entry) {
       var websocket = new WebSocket(config.serverUrl);
       entry.onUpdate.AddListener(() => {
 #if !UNITY_WEBGL || UNITY_EDITOR
@@ -45,7 +43,7 @@ namespace Project.Scene.Battle {
       });
 
       // waiting for messages
-      await websocket.Connect();
+      websocket.Connect();
     }
   }
 }
