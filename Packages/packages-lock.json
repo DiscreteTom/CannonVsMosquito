@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "1d36bc164dccfeb6c25b3fb695a5de5f41bae2e6"
+      "hash": "5f4100d138f78ba38ef3f825c982b346af2bf1c9"
     },
     "com.discretetom.uniutils": {
       "version": "https://github.com/DiscreteTom/UniUtils.git",
