@@ -6,11 +6,12 @@ namespace Project.Scene.Battle {
   public class MockServer {
     public void Start(Config config, IEventBus eb, ComposableBehaviour entry) {
       Debug.Log("Using mock server");
+
       var targets = new Dictionary<int, Target>();
-      var targetId = 0;
+      var targetId = 0; // auto increment
 
       // init targets
-      for (var i = 0; i < config.initTargetCount; ++i) {
+      for (var i = 0; i < config.mockServerInitTargetCount; ++i) {
         targets[i] = new Target {
           x = Random.Range(-5f, 5f),
           y = Random.Range(-3f, 3f),
@@ -29,6 +30,7 @@ namespace Project.Scene.Battle {
       // handle shoot events
       eb.AddListener((LocalShootEvent e) => {
         var (x, y, angle, playerId) = e;
+        // simulate latency
         entry.Invoke(() => {
           // calculate hit
           var hit = new List<int>();
@@ -63,8 +65,8 @@ namespace Project.Scene.Battle {
       var generate = true;
       entry.InvokeRepeating(() => {
         if (!generate) return;
-        var newTargets = new Target[config.newTargetCount];
-        for (var i = 0; i < config.newTargetCount; ++i) {
+        var newTargets = new Target[config.mockServerNewTargetCount];
+        for (var i = 0; i < config.mockServerNewTargetCount; ++i) {
           targets[targetId] = new Target {
             x = Random.Range(-5f, 5f),
             y = Random.Range(-3f, 3f),
@@ -76,7 +78,7 @@ namespace Project.Scene.Battle {
         eb.Invoke(new NewTargetEvent {
           targets = newTargets
         });
-      }, config.mockServerLatency + config.newTargetInterval, config.newTargetInterval);
+      }, config.mockServerLatency + config.mockServerNewTargetInterval, config.mockServerNewTargetInterval);
 
       // mock game over event
       entry.Invoke(() => {

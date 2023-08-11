@@ -4,12 +4,12 @@ using UnityEngine;
 public class Config : ScriptableObject {
   [Header("Server")]
   public string serverUrl;
-  public float mockServerLatency = 0.2f;
-  public int initTargetCount = 5;
-  public float newTargetInterval = 3f;
-  public int newTargetCount = 3;
-  public float mockPlayerShootInterval = 0.5f;
   public bool usingMockServer => this.serverUrl == "";
+  public float mockServerLatency = 0.2f;
+  public int mockServerInitTargetCount = 5;
+  public float mockServerNewTargetInterval = 3f;
+  public int mockServerNewTargetCount = 3;
+  public float mockPlayerShootInterval = 0.5f;
 
   [Header("Game")]
   public string roomId;
