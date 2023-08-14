@@ -94,8 +94,8 @@ namespace Project.Scene.Battle {
       // update player score text
       var text = this.transform.Find("Canvas/ScoreText").GetComponent<TMP_Text>();
       var textScale = text.transform.localScale; // save initial scale
-      this.Watch(model.scores[this.playerId], () => {
-        text.text = model.scores[this.playerId].Value.ToString();
+      this.Watch(model.scores[this.playerId], (v) => {
+        text.text = v.ToString();
       });
       this.Watch(eb, (GameShootEvent ge) => {
         var e = ge.e;
