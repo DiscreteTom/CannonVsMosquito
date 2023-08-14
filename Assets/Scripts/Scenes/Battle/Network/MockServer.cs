@@ -9,6 +9,7 @@ namespace Project.Scene.Battle {
 
       var targets = new Dictionary<int, Target>();
       var targetId = 0; // auto increment
+      var playerScores = new int[2];
 
       // init targets
       for (var i = 0; i < config.mockServerInitTargetCount; ++i) {
@@ -49,6 +50,8 @@ namespace Project.Scene.Battle {
             targets.Remove(id);
           }
 
+          playerScores[playerId] += hit.Count;
+
           eb.Invoke(new GameShootEvent(new PlayerShootEvent {
             player = playerId,
             hit = hit.ToArray(),
@@ -83,7 +86,7 @@ namespace Project.Scene.Battle {
       // mock game over event
       entry.Invoke(() => {
         eb.Invoke(new GameOverEvent {
-          winner = config.localPlayerId,
+          winner = playerScores[0] > playerScores[1] ? 0 : 1,
         });
         generate = false;
       }, config.mockServerLatency + config.gameTimeout);
