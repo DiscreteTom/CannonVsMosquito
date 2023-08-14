@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## v0.1.18
+
+- Feat: remove `Exit` button on WebGL build.
+
 ## v0.1.17
 
+- Fix: cannons now will rotate in different directions to keep this game fair.
 - Note: move to unity editor 2022.3.
+- Note: apply UniStart framework v11.3.0.
 
 ## v0.1.16
 
