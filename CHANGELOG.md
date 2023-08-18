@@ -2,7 +2,7 @@
 
 ## v0.1.19
 
-- Feat: add `Authorization` header to websocket connection.
+- Feat: add `Auth` header to websocket connection.
 
 ## v0.1.18
 

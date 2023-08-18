@@ -7,7 +7,7 @@ namespace Project.Scene.Battle {
   public static class WebSocketManager {
     public static void Apply(ComposableBehaviour entry, Config config, IEventBus eb) {
       var websocket = new WebSocket(config.serverUrl, new Dictionary<string, string>() {
-        {"Authorization", $"Bearer {config.authToken}"}
+        {"Auth", config.authToken}
       });
 
       // poll messages on every frame
