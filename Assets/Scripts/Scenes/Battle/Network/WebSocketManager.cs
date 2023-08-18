@@ -6,9 +6,7 @@ using UnityEngine;
 namespace Project.Scene.Battle {
   public static class WebSocketManager {
     public static void Apply(ComposableBehaviour entry, Config config, IEventBus eb) {
-      var websocket = new WebSocket(config.serverUrl, new Dictionary<string, string>() {
-        {"Auth", config.authToken}
-      });
+      var websocket = new WebSocket($"{config.serverUrl}?auth={config.authToken}");
 
       // poll messages on every frame
       entry.onUpdate.AddListener(() => {

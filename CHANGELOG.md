@@ -2,7 +2,7 @@
 
 ## v0.1.19
 
-- Feat: add `Auth` header to websocket connection.
+- Feat: add `auth` url param for websocket connection.
 
 ## v0.1.18
 
