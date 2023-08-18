@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.1.19
+
+- Feat: add `Authorization` header to websocket connection.
+
 ## v0.1.18
 
 - Feat: remove `Exit` button on WebGL build.

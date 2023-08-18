@@ -10,6 +10,7 @@ public class Config : ScriptableObject {
   public float mockServerNewTargetInterval = 3f;
   public int mockServerNewTargetCount = 3;
   public float mockPlayerShootInterval = 0.5f;
+  public string authToken = "awesome.serverless";
 
   [Header("Game")]
   public string roomId;

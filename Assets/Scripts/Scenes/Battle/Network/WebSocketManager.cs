@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DT.UniStart;
 using NativeWebSocket;
 using UnityEngine;
@@ -5,7 +6,9 @@ using UnityEngine;
 namespace Project.Scene.Battle {
   public static class WebSocketManager {
     public static void Apply(ComposableBehaviour entry, Config config, IEventBus eb) {
-      var websocket = new WebSocket(config.serverUrl);
+      var websocket = new WebSocket(config.serverUrl, new Dictionary<string, string>() {
+        {"Authorization", $"Bearer {config.authToken}"}
+      });
 
       // poll messages on every frame
       entry.onUpdate.AddListener(() => {
